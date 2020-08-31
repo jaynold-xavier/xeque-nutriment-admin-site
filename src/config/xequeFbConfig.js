@@ -15,10 +15,10 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 firebase.firestore().enablePersistence()
-.then(() => firebase.firestore())
-.catch(err => {
-  return firebase.firestore();
-});
+  .then(() => firebase.firestore())
+  .catch(err => {
+    return firebase.firestore();
+  });
 firebase.auth();
 
 export default firebase;

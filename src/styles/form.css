@@ -121,7 +121,7 @@ input[type="password"] {
         box-shadow: 5px 5px 15px rgb(88, 88, 88);
 }
 
-#customBtn {
+.googleBtn {
         background: white;
         border-radius: 5px;
         border: thin solid #888;
@@ -130,22 +130,16 @@ input[type="password"] {
         margin-bottom: 0.5rem;
         padding: 0.4rem;
         overflow:hidden;
-        transform: scale(0.8);
+        transform: scale(0.9);
 }
 
-#customBtn:hover {
-        cursor: pointer;
-        transform: scale(1);
-        box-shadow: 2px 2px 2px rgb(68, 16, 83);
-}
-
-#customBtn img {
+.googleBtn img {
         vertical-align: middle;
         width: 2rem;
         padding: 0 10px;
 }
 
-#customBtn span.buttonText {
+.googleBtn span {
         font-size: 0.9rem;
         font-weight: bold;
 }

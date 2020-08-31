@@ -13,10 +13,8 @@ const Statistics = ({ stats }) => {
         })
         return (
                 <ComponentMotionTag className="stats-area" >
-                        <ul className="stats">
-                                {stat_items}
-                        </ul>
+                        <ul className="stats">{stat_items}</ul>
                 </ComponentMotionTag>
         )
 }
-export default Statistics;
+export default React.memo(Statistics);

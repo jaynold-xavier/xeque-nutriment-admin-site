@@ -1,24 +1,21 @@
 .welcome {
         margin: 0 auto;
         margin-top: 30vh;
+        width: fit-content;
+        font-family: "Franklin Gothic Medium", Arial, sans-serif;
         text-align: center;
         transform: scale(1);
 }
 
 .welcome h1 {
-        margin: 0 auto;
-        color: rgb(223, 237, 255);
+        margin: 0;
         letter-spacing: 0.5rem;
-        width: fit-content;
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-.welcome h4 {
-        margin: 0 auto;
+.welcome span {
         color: gold;
-        width: fit-content;
         letter-spacing: 0.3rem;
-        font-family: "Arial Narrow", Arial, sans-serif;
+        text-transform: uppercase;
 }
 
 .welcome img {

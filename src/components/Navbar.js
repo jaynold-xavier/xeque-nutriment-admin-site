@@ -17,8 +17,7 @@ const Navbar = ({user}) => {
                                         <span>|</span>
                                         <span>|</span>
                                         <span>|</span>
-                                </div>
-                                <div className="mess">Authenticating</div>
+                                </div><div className="mess"></div>
                         </div>
                         <label htmlFor="menu-button">
                                 <img src={menu} className="menu-icon" alt="logo" />

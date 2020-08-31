@@ -1,7 +1,7 @@
 import React from 'react'
 import ComponentMotionTag from './ComponentMotionTag'
 
-const Orders = ({ items, setToggleOrderItem, setToggleAssign }) => {
+const Orders = ({ items, setToggleModal }) => {
         const order_items = Object.values(items).map(item => {
                 const { id, orderedBy, orderDate } = item;
                 const sec = new Date(orderDate.seconds * 1000).toDateString()
@@ -13,8 +13,8 @@ const Orders = ({ items, setToggleOrderItem, setToggleAssign }) => {
                                         <span>Date: </span>{sec}
                                 </div>
                                 <div className="actions">
-                                        <button onClick={()=>setToggleOrderItem(item)}>View Details</button>
-                                        <button onClick={()=>setToggleAssign(item)}>Assign</button>
+                                        <button onClick={()=>setToggleModal({assign: false, orders: item})}>View Details</button>
+                                        <button onClick={()=>setToggleModal({assign: item, orders: false})}>Assign</button>
                                 </div>
                         </li>
                 )

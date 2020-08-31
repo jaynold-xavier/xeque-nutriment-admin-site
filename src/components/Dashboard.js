@@ -12,8 +12,7 @@ const Assign = React.lazy(() => import('./Assign'));
 const Dashboard = ({ user }) => {
         useFirestoreConnect('orders')
         const orders = useSelector((state) => state.firestore.ordered.orders)
-        const [toggleOrderItem, setToggleOrderItem] = useState(false)
-        const [toggleAssign, setToggleAssign] = useState(false)
+        const [toggleModal, setToggleModal] = useState({assign: false, orders: false})
         
         const stats = [
                 {
@@ -46,11 +45,11 @@ const Dashboard = ({ user }) => {
                         <span className="welcome-mess">
                                 Welcome, <span>{user.displayName || user.email.substr(0, user.email.indexOf('@'))}</span>
                         </span>
-                        <Orders items={orders} setToggleOrderItem={setToggleOrderItem} setToggleAssign={setToggleAssign} />
+                        <Orders items={orders} setToggleModal={setToggleModal} />
                         <Statistics stats={stats} />
                         <Suspense fallback={<div>Loading...</div>}>
-                                <OrderItem setToggleAssign = {setToggleAssign} toggleOrderItem={toggleOrderItem} setToggleOrderItem={setToggleOrderItem} />
-                                <Assign toggleAssign={toggleAssign} setToggleAssign={setToggleAssign} setToggleOrderItem={setToggleOrderItem}/>
+                                <OrderItem toggleModal = {toggleModal} setToggleModal={setToggleModal} />
+                                <Assign toggleModal={toggleModal} setToggleModal={setToggleModal}/>
                         </Suspense>
                 </div>
         )

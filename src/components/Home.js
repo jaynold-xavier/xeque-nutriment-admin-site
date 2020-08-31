@@ -22,11 +22,11 @@ const Home = () => {
                 initial={'hidden'} 
                 animate={'visible'} 
                 exit={{x: '100vw', transition: {ease: "easeInOut"}}}>
-                        <motion.img src={logo} alt="logo_home" initial={'hidden'}/>
-                        <motion.h1>WELCOME</motion.h1>
-                        <motion.h4>to the admin site</motion.h4>
+                        <img src={logo} alt="logo_home" initial={'hidden'}/>
+                        <h1>WELCOME</h1>
+                        <span>to the admin site</span>
                 </motion.div>
         )
 }
 
-export default Home;
+export default React.memo(Home);

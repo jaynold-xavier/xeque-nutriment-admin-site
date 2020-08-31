@@ -2,15 +2,15 @@ import React from 'react'
 import ComponentMotionTag from './ComponentMotionTag'
 import '../styles/orderitem.css';
 
-const OrderItem = ({ toggleOrderItem, setToggleOrderItem, setToggleAssign }) => {
-        let { id, orderedBy, orderDate } = toggleOrderItem;
+const OrderItem = ({ toggleModal, setToggleModal }) => {
+        let { id, orderedBy, orderDate } = toggleModal.orders;
         orderDate = new Date(orderDate?.seconds * 1000).toDateString()
 
         return (<>
-                {toggleOrderItem &&
+                {toggleModal.orders &&
                         <section className="order-item-back">
                                 <ComponentMotionTag className="order-container">
-                                        <span className="close-order-item" onClick={() => setToggleOrderItem(false)}>x</span>
+                                        <span className="close-order-item" onClick={() => setToggleModal({orders: false, assign: false})}>x</span>
                                         <div className="order-item-summary">
                                                 <div className="col">
                                                         ID: <span>{id}</span><br />
@@ -49,11 +49,10 @@ const OrderItem = ({ toggleOrderItem, setToggleOrderItem, setToggleAssign }) => 
                                         </div>
                                         <button className="assign-button"
                                                 onClick={() => {
-                                                        setToggleOrderItem(false)
-                                                        setToggleAssign(toggleOrderItem)
+                                                        setToggleModal({assign: toggleModal.orders, orders: false})
                                                 }}>
                                                 ASSIGN
-                                                </button>
+                                        </button>
                                 </ComponentMotionTag>
                         </section>
                 }</>

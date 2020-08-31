@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ComponentMotionTag from './ComponentMotionTag'
 import '../styles/assign.css';
 
-const Assign = ({ toggleAssign, setToggleAssign, setToggleOrderItem }) => {
+const Assign = ({ toggleModal, setToggleModal }) => {
         useFirestoreConnect('employees')
         const db = useFirestore();
         const emps = useSelector((state) => state.firestore.ordered.employees)
@@ -53,13 +53,13 @@ const Assign = ({ toggleAssign, setToggleAssign, setToggleOrderItem }) => {
 
                 if (selectedEmployee) {
                         db.collection("assignments").doc().set({
-                                order_id: toggleAssign.id,
+                                order_id: toggleModal.assign.id,
                                 emp_email: selectedEmployee
                         })
                                 .then(function () {
                                         loader.style.boxShadow = "inset 0px 5rem green";
                                         anim_message.innerHTML = "Assignment Successfull";
-                                        setToggleAssign(false);
+                                        setToggleModal({orders: false, assign: false});
                                 })
                                 .catch((err) => {
                                         loader.style.boxShadow = "inset 0px 5rem crimson";
@@ -76,14 +76,13 @@ const Assign = ({ toggleAssign, setToggleAssign, setToggleOrderItem }) => {
                 }, 2000)
         }
         return (<>
-                {toggleAssign &&
+                {toggleModal.assign &&
                         <section className="order-item-back">
                                 <ComponentMotionTag className="assign-container"
-                                        data-id={'Assignment to ID ' + toggleAssign.id}>
-                                        <span className="close-order-item" onClick={() => setToggleAssign(false)}>x</span>
+                                        data-id={'Assignment to ID ' + toggleModal.assign.id}>
+                                        <span className="close-order-item" onClick={() => setToggleModal({orders: false, assign: false})}>x</span>
                                         <span className="go-back" onClick={() => {
-                                                setToggleOrderItem(toggleAssign)
-                                                setToggleAssign(false)
+                                                setToggleModal({orders: toggleModal.assign, assign: false})
                                         }}>{'<'}</span>
 
                                         <div className="grid-employees">

@@ -93,6 +93,11 @@ img{
   font-size: 0.9rem;
 }
 
+button:hover {
+  cursor: pointer;
+  box-shadow: 5px 5px 15px rgb(88, 88, 88);
+}
+
 @keyframes anim_loader {
   0% {
     transform: scale(0.8);

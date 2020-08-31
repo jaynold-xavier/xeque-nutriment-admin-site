@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useFirebase } from 'react-redux-firebase';
 
 const SignedInLinks = ({ u }) => {
@@ -8,7 +8,6 @@ const SignedInLinks = ({ u }) => {
                 firebase.auth().signOut()
                         .then(() => {
                                 firebase.logout()
-                                        .then(() => <Redirect to="/" />)
                                         .catch(err => console.log(err))
                         })
                         .catch(err => console.log(err))

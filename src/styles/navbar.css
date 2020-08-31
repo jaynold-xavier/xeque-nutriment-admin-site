@@ -39,6 +39,7 @@
 }
 
 .nav-item {
+  width: 15%;
   min-width: 90px;
 }
 
@@ -88,6 +89,12 @@
 }
 
 @media only screen and (max-width: 700.99px) {
+
+  .nav-item:first-child {
+    width: 50%;
+    margin-right: auto;
+  }
+
   .user-logo {
     right: 3.5rem;
   }

@@ -9,29 +9,30 @@ const Home = React.lazy(() => import('./components/Home'));
 const Navbar = React.lazy(() => import('./components/Navbar'));
 const Form = React.lazy(() => import('./components/Form'));
 const Dashboard = React.lazy(() => import('./components/Dashboard'));
-const ErrorPage = React.lazy(() => import('./components/ErrorPage'));
+const ErrorBoundary = React.lazy(() => import('./components/ErrorBoundary'));
 
-const AuthIsLoaded = ({ children }) => {
-  const auth = useSelector(state => state.firebase.auth)
-  if (!isLoaded(auth)) return false;
-  return children;
-}
-
-const MotionRedirect = ({ children, ...props }) => (
+const MotionRedirect = ({ ...props }) => (
   <motion.div exit="undefined">
     <Redirect {...props} />
   </motion.div>
 )
 
-const Loading = () => {
+const Loading = React.memo(() => {
   return <div 
     style={{
       marginLeft: '45vw',
       marginTop: '45vh',
       fontWeight: "bolder",
-      fontSize: "1.5rem"
+      fontSize: "1.5rem",
+      color: "lightcoral"
     }}>Loading...</div>;
-}
+})
+
+const AuthIsLoaded = React.memo(({ children }) => {
+  const auth = useSelector(state => state.firebase.auth)
+  if (!isLoaded(auth)) return false;
+  return children;
+})
 
 function App() {
   const [user, setUser] = useState(false);
@@ -55,6 +56,7 @@ function App() {
     <div className="App">
       <AuthIsLoaded>
         <Suspense fallback={<Loading/>}>
+        <ErrorBoundary>
           <Navbar user={user} />
           <AnimatePresence exitBeforeEnter>
             <Switch location={location} key={location.key}>
@@ -71,10 +73,10 @@ function App() {
                 {!user ? <MotionRedirect to="/" /> : <Dashboard user={user} />}
               </Route>
               <Route path="*">
-                <ErrorPage />
               </Route>
             </Switch>
           </AnimatePresence>
+        </ErrorBoundary>
         </Suspense>
       </AuthIsLoaded>
     </div>

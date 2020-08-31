@@ -18,4 +18,4 @@ const SignedOutLinks = () => {
         )
 }
 
-export default SignedOutLinks;
+export default React.memo(SignedOutLinks);
