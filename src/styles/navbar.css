@@ -1,0 +1,128 @@
+.navbar {
+  width: 90%;
+  position: relative;
+  background-color: var(--navbar-color);
+  border-radius: 50px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-color);
+}
+
+.navbar-nav {
+  max-height: 3rem;
+  display: flex;
+  list-style-type: none;
+  width: var(--content-width);
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  font-weight: bolder;
+  transition: max-height 0.25s ease-in-out;
+}
+
+.nav-item a{
+  height: 3rem;
+  display: flex;
+  text-decoration: none;
+  color: var(--text-color);
+  align-items: center;
+  justify-content: center;
+}
+
+.active span {
+  text-decoration: overline;
+  text-decoration-color: rgb(255, 125, 164);
+}
+
+.nav-item:first-child {
+  width: fit-content;
+  margin-right: auto;
+}
+
+.nav-item {
+  width: 15%;
+  min-width: 90px;
+}
+
+.nav-item:last-child span:hover {
+  color: rgb(201, 228, 255);
+  background-color: var(--hover-color);
+}
+
+.nav-item:not(:first-child) a:hover {
+  color: rgb(201, 228, 255);
+  background-color: var(--hover-color);
+}
+
+.logo {
+  width: 3rem;
+}
+
+.nav-item:first-child:hover img{
+  transform: rotate(15deg);
+  border: 3px deeppink solid;
+  transition: transform 200ms;
+  border-radius: 10px;
+}
+
+.menu-icon {
+  width: 1.5rem;
+  display: none;
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.navbar input {
+  display: none;
+}
+
+.user-logo{
+  position: absolute;
+  right: 1rem;
+  top: 0.4rem;
+  line-height: 0;
+  padding :1rem 0.5rem 1rem 0.5rem;
+  background-color: rgb(163, 6, 163);
+  border-radius: 50%;
+  border: 2px whitesmoke solid;
+  text-align: center;
+  width: 20px;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 700.99px) {
+.user-logo{
+  right:3.5rem;
+}
+  :root {
+    --content-width: 100%;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .menu-icon {
+    display: inline-block;
+  }
+
+  .nav-item a {
+    justify-content: flex-start;
+    padding: 0 30px;
+  }
+
+  .navbar input:checked ~ .navbar-nav {
+    max-height: 300px;
+  }
+
+  .navbar-nav{
+    flex-direction: column;
+    border-radius: inherit;
+  }
+}

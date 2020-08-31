@@ -1,0 +1,133 @@
+:root {
+  --background-color: linear-gradient(40deg,
+      rgb(121, 41, 121),
+      rgb(79, 82, 255) 90%);
+  --navbar-color: transparent;
+  --text-color: rgb(236, 244, 255);
+  --hover-color: rgb(212, 0, 142);
+  --shadow-color: 3px 3px 3px 3px rgb(0, 57, 114);
+  --container-color: linear-gradient(45deg,
+      rgb(194, 187, 199),
+      rgb(177, 142, 204) 90%);
+  --content-width: 80%;
+  font-size: 20px;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Calibri", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--background-color);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: var(--text-color);
+}
+
+body::-webkit-scrollbar {
+  height: 0.25rem;
+  width: 0.75rem;
+  background: var(--navbar-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(turquoise, deeppink);
+}
+
+.App {
+  margin-top: 20px
+}
+
+.verify {
+  box-shadow: inset 0px 5rem rgb(110, 81, 98);
+  border: 2px snow solid;
+  position: fixed;
+  width: 500px;
+  height: 3em;
+  top: -190px;
+  left: 50%;
+  opacity: 0;
+  margin-top: -3em;
+  /* Negative half of height. */
+  margin-left: -250px;
+  /* Negative half of width. */
+  display: flex;
+  justify-content: space-evenly;
+  transition: all 500ms;
+  align-items: center;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.verify .anim {
+  height: 100%;
+  width: fit-content;
+  margin-top: 1em;
+  vertical-align: middle;
+}
+
+.verify .anim span {
+  background: snow;
+  width: 0.5rem;
+  margin-left: 5px;
+  display: inline-block;
+  border-radius: 50px;
+  height: 2rem;
+  animation-name: anim_loader;
+  animation-duration: 500ms;
+  animation-play-state: paused;
+  animation-iteration-count: infinite;
+  animation-fill-mode: backwards;
+}
+
+.verify .mess {
+  width: 60%;
+  font-size: 0.9rem;
+}
+
+@keyframes anim_loader {
+  0% {
+    transform: scale(0.8);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+@media only screen and (max-width: 700.99px) {
+  .verify{
+    width: 80vw;
+    margin-top: -3em;
+    margin-left: -40vw;
+  }
+}
+
+@media only screen and (max-width: 400.99px) {
+  :root {
+    font-size: 15px
+  }
+
+  /* form */
+  .container {
+    width: 80vw;
+  }
+
+  .verify{
+    top: -150px;
+  }
+}

@@ -1,0 +1,22 @@
+.loader-back{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top:0;
+        left:0;
+        background: none;
+        text-align: center;
+        z-index: -1;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.loading{
+        margin: 0 auto;
+        margin-top: 40vh;
+        border-top: 10px rgb(247, 141, 255) dashed;
+        padding: 2rem;
+        width: max-content;
+        border-radius: 50px;
+        position: relative;
+        animation: stat-anim 700ms ease-out 0s infinite backwards;
+}

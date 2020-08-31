@@ -1,0 +1,209 @@
+.container::before {
+        content: attr(data-header);
+        position: relative;
+        background: rgb(104, 50, 129);
+        padding: 1rem;
+        top: -30px;
+        text-transform: uppercase;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.container {
+        margin: 5rem auto;
+        margin-bottom: 1rem;
+        box-shadow: 5px 5px 5px rgb(0, 0, 0);
+        background: var(--container-color);
+        /* border: 5px black solid; */
+        border-radius: 50px;
+        text-align: center;
+        width: 500px;
+        padding: 1rem;
+}
+
+form {
+        margin: 0 auto;
+        margin-top: 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        width: 80%;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+        outline: none;
+}
+
+.form-group {
+        display: grid;
+        margin-bottom: 20px;
+        grid-template-columns: repeat(2, auto);
+}
+
+.form-group label img {
+        height: 100%;
+        width: 2.5rem;
+        vertical-align: middle;
+}
+
+.form-group label{
+        position: relative;
+}
+
+#helpId {
+        color: crimson;
+        font-weight: bold;
+        grid-column: 2;
+        text-align: left;
+}
+
+input::placeholder {
+        color: snow;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+        outline: none;
+        border: 0;
+        background: none;
+        color: snow;
+        border-bottom: 2px black dashed;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+        height: 1rem;
+}
+
+.bar-area{
+        display: flex;
+        height: 0.75rem;
+        width: 100%;
+        grid-column: 2;
+        margin-top: 0.25rem;
+}
+
+.bar{
+        margin-right: 0.25rem;
+        height: 100%;
+        width: 25%;
+        transition: box-shadow 500ms;
+        box-shadow: inset 0px 1rem rgb(92, 88, 88);
+}
+
+.bar-show{
+        box-shadow: none;
+}
+
+.bar:first-child{
+        background: linear-gradient(to right, red, orangered);
+}
+
+.bar:nth-child(2){
+        background: linear-gradient(to right, orangered, yellow);
+}
+
+.bar:nth-child(3){
+        background: linear-gradient(to right, yellow, yellowgreen);
+}
+
+.bar:last-child{
+        background: linear-gradient(to right, yellowgreen, green);
+}
+
+.container a {
+        font-size: 1rem;
+        color: black;
+        text-decoration: none;
+}
+
+.container a:hover {
+        text-decoration-line: underline;
+}
+
+.btn {
+        margin: 20px auto;
+        font-size: 1rem;
+        font-weight: bolder;
+        color: snow;
+        border-radius: 50px;
+        background: linear-gradient(45deg,
+                        rgb(208, 135, 235),
+                        rgb(79, 82, 255) 70%);
+        border: 0;
+        padding: 0.7em;
+        width: 100%;
+}
+
+.btn:hover {
+        cursor: pointer;
+        box-shadow: 5px 5px 25px rgb(39, 74, 124);
+}
+
+.btn:disabled:hover {
+        cursor: not-allowed;
+        box-shadow: none;
+}
+
+.btn:disabled {
+        background: linear-gradient(45deg,
+                        skyblue,
+                        grey 70%);
+}
+
+#customBtn {
+        background: white;
+        color: #444;
+        border-radius: 5px;
+        border: thin solid #888;
+        box-shadow: 1px 1px 1px grey;
+        white-space: nowrap;
+        margin-bottom: 20px;
+        padding: 0.4rem;
+        margin: 0 auto;
+        width: fit-content;
+        overflow:hidden;
+        transform: scale(0.8);
+}
+
+#customBtn:hover {
+        cursor: pointer;
+        box-shadow: 2px 2px 2px rgb(68, 16, 83);
+}
+
+#customBtn img {
+        vertical-align: middle;
+        width: 2rem;
+        padding: 0 10px;
+}
+
+span.buttonText {
+        font-size: 0.9rem;
+        font-weight: bold;
+        font-family: "Roboto", sans-serif;
+}
+
+.or {
+        border: 2px white solid;
+        border-radius: 50px;
+        padding: 5px;
+        background: rgb(97, 97, 97);
+}
+
+@media only screen and (max-width: 700.99px) {
+        .container {
+                width: 70vw;
+        }
+
+        .form-group label img {
+                margin-right: 0.5rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+                width: 100%;
+        }
+}
