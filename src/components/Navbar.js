@@ -11,7 +11,15 @@ const Navbar = ({user}) => {
         const u = user && (user.displayName || user.email)?.substr(0, 1).toUpperCase()
         const links = user ? <SignedInLinks u={u}/> : <SignedOutLinks/>;
         return (
-                <motion.header className="navbar" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <motion.nav className="navbar" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                        <div className="verify">
+                                <div className="anim">
+                                        <span>|</span>
+                                        <span>|</span>
+                                        <span>|</span>
+                                </div>
+                                <div className="mess">Authenticating</div>
+                        </div>
                         <label htmlFor="menu-button">
                                 <img src={menu} className="menu-icon" alt="logo" />
                         </label>
@@ -19,13 +27,13 @@ const Navbar = ({user}) => {
                         <ul className="navbar-nav">
                                 <li className="nav-item">
                                         <NavLink exact to="/">
-                                                <img src={logo} className="logo" alt="logo" style={{ marginRight: '10px' }} />
+                                                <img src={logo} className="logo" alt="logo" style={{ marginRight: '0.5rem' }} />
                                                 <span className="link-text">Xeque Nutriment</span>
                                         </NavLink>
                                 </li>
                                 {links}
                         </ul>
-                </motion.header>
+                </motion.nav>
 
         )
 }

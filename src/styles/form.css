@@ -27,30 +27,12 @@ form {
         flex-direction: column;
         justify-content: center;
         align-content: center;
-        width: 80%;
-}
-
-input:focus,
-textarea:focus,
-select:focus,
-button:focus {
-        outline: none;
+        width: var(--content-width);
 }
 
 .form-group {
         display: grid;
-        margin-bottom: 20px;
-        grid-template-columns: repeat(2, auto);
-}
-
-.form-group label img {
-        height: 100%;
-        width: 2.5rem;
-        vertical-align: middle;
-}
-
-.form-group label{
-        position: relative;
+        margin-bottom: 1rem;
 }
 
 #helpId {
@@ -87,7 +69,6 @@ input[type="password"] {
 
 .bar{
         margin-right: 0.25rem;
-        height: 100%;
         width: 25%;
         transition: box-shadow 500ms;
         box-shadow: inset 0px 1rem rgb(92, 88, 88);
@@ -114,24 +95,22 @@ input[type="password"] {
 }
 
 .container a {
-        font-size: 1rem;
         color: black;
         text-decoration: none;
 }
 
 .container a:hover {
         text-decoration-line: underline;
+        text-decoration-color: var(--hover-color);
 }
 
 .btn {
         margin: 20px auto;
         font-size: 1rem;
         font-weight: bolder;
-        color: snow;
+        color: var(--text-color);
         border-radius: 50px;
-        background: linear-gradient(45deg,
-                        rgb(208, 135, 235),
-                        rgb(79, 82, 255) 70%);
+        background: var(--background-color);
         border: 0;
         padding: 0.7em;
         width: 100%;
@@ -139,37 +118,24 @@ input[type="password"] {
 
 .btn:hover {
         cursor: pointer;
-        box-shadow: 5px 5px 25px rgb(39, 74, 124);
-}
-
-.btn:disabled:hover {
-        cursor: not-allowed;
-        box-shadow: none;
-}
-
-.btn:disabled {
-        background: linear-gradient(45deg,
-                        skyblue,
-                        grey 70%);
+        box-shadow: 5px 5px 15px rgb(88, 88, 88);
 }
 
 #customBtn {
         background: white;
-        color: #444;
         border-radius: 5px;
         border: thin solid #888;
         box-shadow: 1px 1px 1px grey;
         white-space: nowrap;
-        margin-bottom: 20px;
+        margin-bottom: 0.5rem;
         padding: 0.4rem;
-        margin: 0 auto;
-        width: fit-content;
         overflow:hidden;
         transform: scale(0.8);
 }
 
 #customBtn:hover {
         cursor: pointer;
+        transform: scale(1);
         box-shadow: 2px 2px 2px rgb(68, 16, 83);
 }
 
@@ -179,17 +145,16 @@ input[type="password"] {
         padding: 0 10px;
 }
 
-span.buttonText {
+#customBtn span.buttonText {
         font-size: 0.9rem;
         font-weight: bold;
-        font-family: "Roboto", sans-serif;
 }
 
 .or {
         border: 2px white solid;
         border-radius: 50px;
-        padding: 5px;
-        background: rgb(97, 97, 97);
+        padding: 0.5rem;
+        background: rgb(81, 31, 65);
 }
 
 @media only screen and (max-width: 700.99px) {
@@ -199,11 +164,5 @@ span.buttonText {
 
         .form-group label img {
                 margin-right: 0.5rem;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-                width: 100%;
         }
 }

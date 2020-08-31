@@ -1,9 +1,7 @@
-import React, { useRef } from 'react'
-import { motion, useElementScroll } from 'framer-motion';
+import React from 'react'
+import ComponentMotionTag from './ComponentMotionTag'
 
 const Orders = ({ items, setToggleOrderItem, setToggleAssign }) => {
-        const ref = useRef()
-        const {scrollY} = useElementScroll(ref)
         const order_items = Object.values(items).map(item => {
                 const { id, orderedBy, orderDate } = item;
                 const sec = new Date(orderDate.seconds * 1000).toDateString()
@@ -21,18 +19,12 @@ const Orders = ({ items, setToggleOrderItem, setToggleAssign }) => {
                         </li>
                 )
         })
-        console.log(scrollY)
         return (
-                <motion.div className="orders-area" 
-                        ref = {ref}
-                        initial={{x: '-50vw'}}
-                        animate={{x: 0}} 
-                        transition = {{type:"tween"}}
-                        exit={{x: '-50vw', transition: {ease: "easeInOut"}}}>
+                <ComponentMotionTag className="orders-area">
                         <ul className="orders-list">
                                 {order_items}
                         </ul>
-                </motion.div>
+                </ComponentMotionTag>
         )
 }
 

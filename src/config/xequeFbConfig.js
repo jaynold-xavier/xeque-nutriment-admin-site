@@ -14,9 +14,11 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-firebase.firestore();
+firebase.firestore().enablePersistence()
+.then(() => firebase.firestore())
+.catch(err => {
+  return firebase.firestore();
+});
 firebase.auth();
-
-export const provider = new firebase.auth.GoogleAuthProvider();
 
 export default firebase;

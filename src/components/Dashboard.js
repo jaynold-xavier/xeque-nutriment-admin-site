@@ -4,8 +4,6 @@ import Statistics from './Statistics';
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Loader from './Loader';
-
-import { motion } from 'framer-motion'
 import '../styles/dashboard.css';
 
 const OrderItem = React.lazy(() => import('./OrderItem')); 
@@ -44,16 +42,7 @@ const Dashboard = ({ user }) => {
                 }}>Orders List Is Empty</div>
         }
         return (
-                <motion.div className="dashboard"
-                        exit={{ opacity: 0, transition: { ease: "easeInOut"} }}>
-                        <div className="verify" style={{top: 0}}>
-                                <div className="anim">
-                                        <span>|</span>
-                                        <span>|</span>
-                                        <span>|</span>
-                                </div>
-                                <div className="mess">Authenticating</div>
-                        </div>
+                <div className="dashboard">
                         <span className="welcome-mess">
                                 Welcome, <span>{user.displayName || user.email.substr(0, user.email.indexOf('@'))}</span>
                         </span>
@@ -63,7 +52,7 @@ const Dashboard = ({ user }) => {
                                 <OrderItem setToggleAssign = {setToggleAssign} toggleOrderItem={toggleOrderItem} setToggleOrderItem={setToggleOrderItem} />
                                 <Assign toggleAssign={toggleAssign} setToggleAssign={setToggleAssign} setToggleOrderItem={setToggleOrderItem}/>
                         </Suspense>
-                </motion.div>
+                </div>
         )
 }
 

@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import { Link, useHistory} from 'react-router-dom'
-import Google from '../icons/google.webp'
+import { Link } from 'react-router-dom'
+import Google from '../icons/google.svg'
 import Email from '../icons/email.svg'
 import Password from '../icons/key.svg'
 import { useForm } from "react-hook-form";
 import { useFirebase } from 'react-redux-firebase';
-import { motion } from 'framer-motion'
-import { provider } from "../config/xequeFbConfig";
+import ComponentMotionTag from './ComponentMotionTag'
 import '../styles/form.css';
 
-const Form = ({title}) => {
+const Form = ({ title }) => {
         const { handleSubmit, register, errors } = useForm({
                 mode: 'onChange'
         });
-        const history = useHistory();
         const firebase = useFirebase();
         const [strength, setStrength] = useState(0);
 
@@ -61,10 +59,10 @@ const Form = ({title}) => {
                 const loader = document.querySelector(".verify");
                 const anim_icons = document.querySelectorAll(".verify .anim span");
                 const anim_message = document.querySelector(".verify .mess");
-                loader.style.marginTop = "1rem";
+                loader.style.marginTop = "6rem";
                 loader.style.opacity = 1;
-                loader.style.boxShadow = "inset 0px 5rem grey";
-                anim_message.innerHTML = 'Authenticating';
+                loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
+                anim_message.innerHTML = 'Authenticating...';
                 anim_icons.forEach(e => e.style.animationPlayState = "running");
 
                 (async function () {
@@ -73,52 +71,23 @@ const Form = ({title}) => {
                         } else if ("Signup") {
                                 return await firebase.createUser({ email: credentials.email, password: credentials.password })
                         }
-                        else ;
+                        else;
                 })()
-                .then(() => history.push("/dashboard"))
                 .catch(err => {
                         loader.style.boxShadow = "inset 0px 5rem crimson";
                         anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
                 })
-                .finally(() => {
+                .finally(_ => {
                         anim_icons.forEach(e => e.style.animationPlayState = "paused")
-                        setTimeout(()=>{
-                                loader.style.marginTop = "-200px"
-                                loader.style.boxShadow = "inset 0px 5rem grey";
-                        }, 1500)
+                        setTimeout(() => {
+                                loader.style.marginTop = "0rem"
+                                loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
+                        }, 2000)
                 })
         }
 
-        const googleOptions = () => {
-                const loader = document.querySelector(".verify");
-                const anim_icons = document.querySelectorAll(".verify .anim span");
-                if(loader.style.opacity === 1){
-                        loader.style.marginTop = "-1rem";
-                        loader.style.opacity = 0;
-                        loader.style.boxShadow = "none";
-                        anim_icons.forEach(e => e.style.animationPlayState = "paused")
-                }
-
-                firebase.auth().signInWithRedirect(provider)
-                        .then(() => history.push("/dashboard"))
-                        .catch(err => console.log(err.message))
-        };
-
         return (
-                <motion.div className="container" data-header={title}
-                        initial={{ x: '-100vw'}} 
-                        animate={{ x: 0 }} 
-                        transition={{type: 'tween'}} 
-                        exit={{ x: '100vw',
-                        transition: { ease: "easeInOut", type: 'tween', mass: 0.4, damping: 7 } }}>
-                        <div className="verify">
-                                <div className="anim">
-                                        <span>|</span>
-                                        <span>|</span>
-                                        <span>|</span>
-                                </div>
-                                <div className="mess">Authenticating</div>
-                        </div>
+                <ComponentMotionTag className="container" data-header={title}>
                         <form id="login-form" method="POST" onSubmit={handleSubmit(onSubmit)}>
                                 <div className="form-group">
                                         <label htmlFor="email"><img src={Email} alt="email-icon" /></label>
@@ -143,21 +112,19 @@ const Form = ({title}) => {
                                         </div>
                                         <small id="helpId">{(errors.password && errors.password.message)}</small>
                                 </div>
-                                <motion.button id="btsub" className="btn" type="submit"
-                                        initial={{ scale: 0.8 }} whileHover={{scale: 1}}>
+                                <button id="btsub" className="btn" type="submit">
                                         {title}
-                                </motion.button>
+                                </button>
                         </form>
                         <span className="or">OR</span>
-                        <br />
-                        <br />
-                        <motion.div id="customBtn" className="customGPlusSignIn" initial={{scale: 0.9}}
-                                whileHover={{ scale: 1.2 }} onClick={googleOptions}>
-                                <img src={Google} alt="Google sign in link" />
+                        <br /><br />
+                        <button id="customBtn" onClick={()=>firebase.login({ provider: 'google', type: 'redirect' })}>
+                                <img src={Google} alt="Google" />
                                 <span className="buttonText">{title} with Google</span>
-                        </motion.div><br />
+                        </button><br />
                         <Link to={"/" + link_title}>{message}</Link>
-                </motion.div>
+                </ComponentMotionTag>
         )
 }
+
 export default Form;

@@ -11,7 +11,8 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import firebase from './config/xequeFbConfig'
 import { BrowserRouter } from 'react-router-dom';
 
-const store = createStore(rootReducer);
+const initialState = {};
+const store = createStore(rootReducer, initialState);
 
 const rrfConfig = {
   userProfile: 'admin',

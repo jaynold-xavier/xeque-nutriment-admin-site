@@ -1,8 +1,7 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import ComponentMotionTag from './ComponentMotionTag'
 
-const Statistics = ({stats}) => {
-
+const Statistics = ({ stats }) => {
         const stat_items = stats.map(v => {
                 return (
                         <li className="stat-item" key={v.title}>
@@ -13,15 +12,11 @@ const Statistics = ({stats}) => {
                 )
         })
         return (
-                <motion.div className="stats-area" 
-                        initial={{x: '50vw'}}  
-                        animate={{x: 0}}
-                        transition = {{type:"tween"}}
-                        exit={{x: '50vw', transition: {ease: "easeInOut"}}}>
-                                <ul className="stats">
-                                        {stat_items}
-                                </ul>
-                        </motion.div>
+                <ComponentMotionTag className="stats-area" >
+                        <ul className="stats">
+                                {stat_items}
+                        </ul>
+                </ComponentMotionTag>
         )
 }
 export default Statistics;

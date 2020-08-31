@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion';
 import { useFirestoreConnect, isLoaded, isEmpty, useFirestore } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
+import ComponentMotionTag from './ComponentMotionTag'
 import '../styles/assign.css';
 
 const Assign = ({ toggleAssign, setToggleAssign, setToggleOrderItem }) => {
@@ -45,65 +45,57 @@ const Assign = ({ toggleAssign, setToggleAssign, setToggleOrderItem }) => {
                 const loader = document.querySelector(".verify");
                 const anim_icons = document.querySelectorAll(".verify .anim span");
                 const anim_message = document.querySelector(".verify .mess");
-                loader.style.marginTop = "1rem";
+                loader.style.marginTop = "6rem";
                 loader.style.opacity = 1;
-                loader.style.boxShadow = "inset 0px 5rem grey";
-                anim_message.innerHTML = 'Processing';
-                anim_icons.forEach(e => e.style.animationPlayState = "running")
+                loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
+                anim_message.innerHTML = 'Processing...';
+                anim_icons.forEach(e => e.style.animationPlayState = "running");
 
-                if(selectedEmployee){
+                if (selectedEmployee) {
                         db.collection("assignments").doc().set({
                                 order_id: toggleAssign.id,
                                 emp_email: selectedEmployee
                         })
-                        .then(function () {
-                                loader.style.boxShadow = "inset 0px 5rem green";
-                                anim_message.innerHTML = "Assignment Successfull";
-                                setToggleAssign(false);
-                        })
-                        .catch((err)=> {
-                                loader.style.boxShadow = "inset 0px 5rem crimson";
-                                anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
-                        })
-                }else{
+                                .then(function () {
+                                        loader.style.boxShadow = "inset 0px 5rem green";
+                                        anim_message.innerHTML = "Assignment Successfull";
+                                        setToggleAssign(false);
+                                })
+                                .catch((err) => {
+                                        loader.style.boxShadow = "inset 0px 5rem crimson";
+                                        anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
+                                })
+                } else {
                         loader.style.boxShadow = "inset 0px 5rem crimson";
                         anim_message.innerHTML = "Please select an employee";
                 }
                 anim_icons.forEach(e => e.style.animationPlayState = "paused")
-                setTimeout(()=>{
-                        loader.style.marginTop = "-3.5rem"
-                        loader.style.boxShadow = "inset 0px 5rem grey";
-                }, 1500)
+                setTimeout(() => {
+                        loader.style.marginTop = "0rem"
+                        loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
+                }, 2000)
         }
-        return (
-                <AnimatePresence exitBeforeEnter>
-                        {toggleAssign &&
-                                <motion.div className="order-item-back"
-                                        initial={{ opacity: 0 }}
-                                        animate={{opacity: 1}}
-                                        exit={{ opacity: 0, transition: { type: "just", when: "afterChildren" } }}>
-                                        <motion.div className="assign-container"
-                                                data-id={'Assignment to ID ' + toggleAssign.id}
-                                                initial={{ x: "-100vw" }}
-                                                animate={{ x: 0 }}
-                                                exit={{ x: '100vw', transition: { type: "just", duration: 0.5 } }}>
-                                                <span className="close-order-item" onClick={() => setToggleAssign(false)}>x</span>
-                                                <span className="go-back" onClick={() => {
-                                                        setToggleOrderItem(toggleAssign)
-                                                        setToggleAssign(false)
-                                                }}>{'<'}</span>
+        return (<>
+                {toggleAssign &&
+                        <section className="order-item-back">
+                                <ComponentMotionTag className="assign-container"
+                                        data-id={'Assignment to ID ' + toggleAssign.id}>
+                                        <span className="close-order-item" onClick={() => setToggleAssign(false)}>x</span>
+                                        <span className="go-back" onClick={() => {
+                                                setToggleOrderItem(toggleAssign)
+                                                setToggleAssign(false)
+                                        }}>{'<'}</span>
 
-                                                <div className="grid-employees">
-                                                        {emp_list}
-                                                </div>
+                                        <div className="grid-employees">
+                                                {emp_list}
+                                        </div>
 
-                                                <button className="assign-button" onClick={() => assignEmployee()}>
-                                                        SELECT
+                                        <button className="assign-button" onClick={() => assignEmployee()}>
+                                                SELECT
                                                 </button>
-                                        </motion.div>
-                                </motion.div>
-                        }
-                </AnimatePresence>
+                                </ComponentMotionTag>
+                        </section>
+                }</>
         )
 }
 export default Assign;
