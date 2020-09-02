@@ -43,11 +43,6 @@
   min-width: 90px;
 }
 
-.nav-item:last-child span:hover {
-  color: rgb(201, 228, 255);
-  background-color: var(--hover-color);
-}
-
 .nav-item:not(:first-child) a:hover {
   color: rgb(201, 228, 255);
   background-color: var(--hover-color);
@@ -55,9 +50,8 @@
 
 .nav-item:first-child:hover img {
   transform: rotate(15deg);
-  border: 3px deeppink solid;
+  border: 2px deeppink solid;
   transition: transform 200ms;
-  border-radius: 10px;
 }
 
 .menu-icon {
@@ -66,7 +60,7 @@
   position: absolute;
   top: 0.5rem;
   right: 1rem;
-  padding: 5px;
+  padding: 0.25rem;
   cursor: pointer;
 }
 
@@ -84,15 +78,17 @@
   border-radius: 50%;
   border: 2px whitesmoke solid;
   text-align: center;
-  width: 20px;
-  text-decoration: none;
+  width: 1rem;
 }
 
 @media only screen and (max-width: 700.99px) {
 
   .nav-item:first-child {
-    width: 50%;
-    margin-right: auto;
+    width: 70%;
+  }
+
+  .nav-item{
+    width: 100%;
   }
 
   .user-logo {
@@ -109,7 +105,7 @@
   }
 
   .navbar input:checked ~ .navbar-nav {
-    max-height: 300px;
+    max-height: 9rem;
   }
 
   .navbar-nav {

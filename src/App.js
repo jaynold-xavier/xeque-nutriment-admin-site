@@ -18,13 +18,12 @@ const MotionRedirect = ({ ...props }) => (
 )
 
 const Loading = React.memo(() => {
-  return <div 
+  return <div
     style={{
-      marginLeft: '45vw',
       marginTop: '45vh',
+      textAlign: 'center',
       fontWeight: "bolder",
       fontSize: "1.5rem",
-      color: "lightcoral"
     }}>Loading...</div>;
 })
 
@@ -38,10 +37,21 @@ function App() {
   const [user, setUser] = useState(false);
   const location = useLocation();
   const firebase = useFirebase();
-  
+
   function onAuthStateChange() {
-    return firebase.auth().onAuthStateChanged(user => {
-      setUser(user)
+    return firebase.auth().onAuthStateChanged(async user => {
+      try{
+        const url = process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT;
+        if(firebase.auth().isSignInWithEmailLink(url)){
+          const email = window.localStorage.getItem('emailForSignIn');
+          console.log(email)
+          await firebase.auth().signInWithEmailLink(email, url);
+          window.localStorage.removeItem('emailForSignIn');
+        }  
+      } catch(err){
+        console.log(err)
+      }
+      setUser(user);
     });
   }
 
@@ -55,8 +65,7 @@ function App() {
   return (
     <div className="App">
       <AuthIsLoaded>
-        <Suspense fallback={<Loading/>}>
-        <ErrorBoundary>
+        <Suspense fallback={<Loading />}>
           <Navbar user={user} />
           <AnimatePresence exitBeforeEnter>
             <Switch location={location} key={location.key}>
@@ -64,19 +73,19 @@ function App() {
                 <Home />
               </Route>
               <Route path="/signup">
-                {!user ? <Form title="Signup" /> : <MotionRedirect to="/dashboard" />}
+                {user && user.emailVerified ?  <MotionRedirect to="/dashboard" /> :<Form title="Signup" />}
               </Route>
               <Route path="/login">
-                {!user ? <Form title="Login" /> : <MotionRedirect to="/dashboard" />}
+                {user && user.emailVerified ? <MotionRedirect to="/dashboard" /> : <Form title="Login" /> }
               </Route>
               <Route path="/dashboard">
-                {!user ? <MotionRedirect to="/" /> : <Dashboard user={user} />}
+                {user && user.emailVerified ? <Dashboard user={{displayName: user.displayName, email: user.email}} /> :<MotionRedirect to="/" /> }
               </Route>
               <Route path="*">
+                <ErrorBoundary />
               </Route>
             </Switch>
           </AnimatePresence>
-        </ErrorBoundary>
         </Suspense>
       </AuthIsLoaded>
     </div>

@@ -11,4 +11,4 @@ const ComponentMotionTag = ({ children, ...props }) => (
         </motion.div>
 );
 
-export default ComponentMotionTag;
+export default React.memo(ComponentMotionTag);

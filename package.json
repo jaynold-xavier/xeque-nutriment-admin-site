@@ -24,7 +24,8 @@
     "start1": "webpack-dev-server --open --hot --mode development",
     "build1": "webpack --mode production",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "firebase deploy --only hosting"
   },
   "eslintConfig": {
     "extends": "react-app"

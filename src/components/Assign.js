@@ -46,9 +46,8 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                 const anim_icons = document.querySelectorAll(".verify .anim span");
                 const anim_message = document.querySelector(".verify .mess");
                 loader.style.marginTop = "6rem";
-                loader.style.opacity = 1;
                 loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
-                anim_message.innerHTML = 'Processing...';
+                anim_message.innerHTML = window.navigator.onLine ? 'Processing...' : 'Assignment will be made when back online';
                 anim_icons.forEach(e => e.style.animationPlayState = "running");
 
                 if (selectedEmployee) {
@@ -56,24 +55,26 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                                 order_id: toggleModal.assign.id,
                                 emp_email: selectedEmployee
                         })
-                                .then(function () {
-                                        loader.style.boxShadow = "inset 0px 5rem green";
-                                        anim_message.innerHTML = "Assignment Successfull";
-                                        setToggleModal({orders: false, assign: false});
-                                })
-                                .catch((err) => {
-                                        loader.style.boxShadow = "inset 0px 5rem crimson";
-                                        anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
-                                })
+                        .then(function () {
+                                loader.style.boxShadow = "inset 0px 5rem green";
+                                anim_message.innerHTML = "Assignment Successfull";
+                                setToggleModal({orders: false, assign: false});
+                        })
+                        .catch((err) => {
+                                loader.style.boxShadow = "inset 0px 5rem crimson";
+                                anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
+                        })
                 } else {
                         loader.style.boxShadow = "inset 0px 5rem crimson";
                         anim_message.innerHTML = "Please select an employee";
                 }
+                
                 anim_icons.forEach(e => e.style.animationPlayState = "paused")
                 setTimeout(() => {
                         loader.style.marginTop = "0rem"
                         loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
                 }, 2000)
+                setSelectedEmployee(undefined)
         }
         return (<>
                 {toggleModal.assign &&
@@ -91,7 +92,7 @@ const Assign = ({ toggleModal, setToggleModal }) => {
 
                                         <button className="assign-button" onClick={() => assignEmployee()}>
                                                 SELECT
-                                                </button>
+                                        </button>
                                 </ComponentMotionTag>
                         </section>
                 }</>

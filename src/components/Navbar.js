@@ -8,8 +8,9 @@ import SignedOutLinks from './SignedOutLinks';
 import '../styles/navbar.css';
 
 const Navbar = ({user}) => {
+        console.log(user)
         const u = user && (user.displayName || user.email)?.substr(0, 1).toUpperCase()
-        const links = user ? <SignedInLinks u={u}/> : <SignedOutLinks/>;
+        const links = user && user.emailVerified ? <SignedInLinks u={u}/> : <SignedOutLinks/>;
         return (
                 <motion.nav className="navbar" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                         <div className="verify">

@@ -56,14 +56,28 @@ const Form = ({ title }) => {
                 (async function () {
                         if (title === "Login") {
                                 return await firebase.login({ ...credentials})
-                        } else if ("Signup") {
-                                return await firebase.createUser({ ...credentials})
+                        } else{
+                                const actionCodeSettings = {
+                                        url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
+                                        handleCodeInApp: true
+                                }
+                                try{
+                                        const user = await firebase.createUser({...credentials});
+                                        await firebase.auth().currentUser.sendEmailVerification(actionCodeSettings);
+                                        window.localStorage.setItem('emailForSignIn', user.email)
+                                }catch(err){
+                                        return Promise.reject(err)
+                                }
                         }
-                        else;
                 })()
                 .then(()=>{
-                        loader.style.boxShadow = "inset 0px 5rem green";
-                        anim_message.innerHTML = 'Success';
+                        if(title === "Signup"){
+                                loader.style.boxShadow = "inset 0px 5rem goldenrod";
+                                anim_message.innerHTML = 'A confirmation link has been sent to the specified email';
+                        }else{
+                                loader.style.boxShadow = "inset 0px 5rem green";
+                                anim_message.innerHTML = 'Success';
+                        }
                 })
                 .catch(err => {
                         loader.style.boxShadow = "inset 0px 5rem crimson";

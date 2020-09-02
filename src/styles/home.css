@@ -1,10 +1,7 @@
 .welcome {
         margin: 0 auto;
-        margin-top: 30vh;
-        width: fit-content;
-        font-family: "Franklin Gothic Medium", Arial, sans-serif;
+        margin-top: 25vh;
         text-align: center;
-        transform: scale(1);
 }
 
 .welcome h1 {

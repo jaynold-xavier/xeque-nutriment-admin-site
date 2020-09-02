@@ -11,7 +11,7 @@
 # production
 /build
 /dist
-/firebase
+/functions
 
 # misc
 .DS_Store
