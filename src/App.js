@@ -3,7 +3,7 @@ import { Switch, Route, useLocation, Redirect } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion';
 import { isLoaded, useFirebase } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
-
+import BackAnimation from './components/BackAnimation'
 // pages
 const Home = React.lazy(() => import('./components/Home'));
 const Navbar = React.lazy(() => import('./components/Navbar'));
@@ -21,9 +21,9 @@ const Loading = React.memo(() => {
   return <div
     style={{
       marginTop: '45vh',
-      textAlign: 'center',
-      fontWeight: "bolder",
+      marginLeft: '45vh',
       fontSize: "1.5rem",
+      position: 'absolute'
     }}>Loading...</div>;
 })
 
@@ -65,6 +65,7 @@ function App() {
   return (
     <div className="App">
       <AuthIsLoaded>
+        <BackAnimation/>
         <Suspense fallback={<Loading />}>
           <Navbar user={user} />
           <AnimatePresence exitBeforeEnter>
