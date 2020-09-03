@@ -29,4 +29,4 @@ const SignedInLinks = ({ u }) => {
         )
 }
 
-export default SignedInLinks;
+export default React.memo(SignedInLinks);

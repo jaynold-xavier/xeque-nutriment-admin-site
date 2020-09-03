@@ -55,4 +55,4 @@ const Dashboard = ({ user }) => {
         )
 }
 
-export default Dashboard;
+export default React.memo(Dashboard);

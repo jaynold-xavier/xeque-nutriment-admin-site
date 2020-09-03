@@ -21,7 +21,8 @@ const Loading = React.memo(() => {
   return <div
     style={{
       marginTop: '45vh',
-      marginLeft: '45vh',
+      width: '100%',
+      textAlign: 'center',
       fontSize: "1.5rem",
       position: 'absolute'
     }}>Loading...</div>;

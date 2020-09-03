@@ -28,4 +28,4 @@ const Orders = ({ items, setToggleModal }) => {
         )
 }
 
-export default Orders;
+export default React.memo(Orders);

@@ -8,7 +8,6 @@ import SignedOutLinks from './SignedOutLinks';
 import '../styles/navbar.css';
 
 const Navbar = ({user}) => {
-        console.log(user)
         const u = user && (user.displayName || user.email)?.substr(0, 1).toUpperCase()
         const links = user && user.emailVerified ? <SignedInLinks u={u}/> : <SignedOutLinks/>;
         return (

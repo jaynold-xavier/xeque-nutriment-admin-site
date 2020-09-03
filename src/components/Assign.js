@@ -27,7 +27,7 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                 Array.from(employees).filter(ele => ele.classList.contains("selected"))
                         .map(element => element.classList.remove("selected"));
 
-                setSelectedEmployee(target.getAttribute('data-key'))
+                setSelectedEmployee(target.getAttribute('data-key'));
                 target.classList.add('selected');
         }
 
@@ -98,4 +98,4 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                 }</>
         )
 }
-export default Assign;
+export default React.memo(Assign);

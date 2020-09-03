@@ -134,4 +134,4 @@ const Form = ({ title }) => {
         )
 }
 
-export default Form;
+export default React.memo(Form);
