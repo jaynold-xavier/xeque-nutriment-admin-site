@@ -22,30 +22,30 @@
         color: gold;
 }
 
-.orders-area::before {
-        content: "Orders";
+.orders-area::before, .stats-area::before {
+        content: attr(data-title);
         background: rgb(104, 50, 129);
         padding: 0.7rem;
         margin: -30px auto;
         text-transform: uppercase;
         text-align: center;
         width: 5rem;
+        z-index: 1;
 }
 
 .orders-area {
         display: flex;
         flex-direction: column;
-        border-radius: 20px;
+        border-radius: 1rem;
         grid-row: span 2 / auto;
         height: fit-content;
         max-height: 500px;
         position: relative;
-        background: linear-gradient(0deg, rgb(99, 203, 255), rgb(255, 30, 98));
+        background: linear-gradient(0deg, rgb(128, 32, 150), transparent);
         box-shadow: 3px 3px 3px 3px rgb(5, 4, 8);
-        /* border: 5px black solid; */
 }
 
-.orders-area::after {
+.orders-area::after, .stats-area::after {
         content: ":";
         border-right: 2px orangered solid;
         width: 5px;
@@ -67,12 +67,12 @@
         font-size: 0.9rem;
         font-family: 'Gill Sans', Calibri, 'Trebuchet MS', sans-serif, Arial;
         margin-bottom: 0;
-        margin-top: 25px;
+        margin-top: 1.5rem;
 }
 
 .orders-list::-webkit-scrollbar {
         height: 0.25rem;
-        width: 0.25rem;
+        width: 0.75rem;
 }
 
 .orders-list::-webkit-scrollbar-track {
@@ -81,7 +81,7 @@
 
 .orders-list::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background: linear-gradient(hotpink 70%, transparent);
+        background: linear-gradient(rgb(255, 173, 105) 70%, transparent);
 }
 
 .orders-list::-webkit-scrollbar-corner {
@@ -137,16 +137,6 @@
         border-bottom: 2px black solid;
 }
 
-.stats-area::before {
-        content: "Statistics";
-        background: rgb(104, 50, 129);
-        padding: 0.7rem;
-        margin: -30px auto;
-        text-transform: uppercase;
-        text-align: center;
-        width: 5rem;
-        z-index: 5;
-}
 
 .stats-area {
         position: relative;
@@ -156,20 +146,7 @@
         align-items: center;
         border-radius: 20px;
         box-shadow: 3px 3px 3px rgb(183, 171, 255);
-        /* border: 5px black solid; */
-}
-
-.stats-area::after {
-        content: ":";
-        border-right: 2px orangered solid;
-        width: 5px;
-        height: 30px;
-        border-left: 2px orangered solid;
-        position: absolute;
-        transform: rotate(-45deg);
-        top: -1rem;
-        left: -0.3rem;
-        padding: 0.1rem;
+        border: 0.01em rgb(255, 255, 255) solid;
 }
 
 .stats {
@@ -180,7 +157,7 @@
         position: inherit;
         height: 100%;
         width: 100%;
-        background-color: rgb(10, 25, 37);
+        background: linear-gradient(0deg, rgb(25, 7, 63), transparent);
         margin: 0;
         padding-top: 30px;
         padding-bottom: 10px;

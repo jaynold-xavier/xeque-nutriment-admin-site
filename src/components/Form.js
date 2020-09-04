@@ -88,7 +88,7 @@ const Form = ({ title }) => {
                         setTimeout(() => {
                                 loader.style.marginTop = "0rem"
                                 loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
-                        }, 1000)
+                        }, 2500)
                 })
         }
 

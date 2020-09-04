@@ -3,16 +3,19 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
-import rootReducer from './rootReducer';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { createFirestoreInstance } from 'redux-firestore';
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
+import { ReactReduxFirebaseProvider, firebaseReducer } from 'react-redux-firebase';
 import firebase from './config/xequeFbConfig'
 import { BrowserRouter } from 'react-router-dom';
 
-const initialState = {};
-const store = createStore(rootReducer, initialState);
+const rootReducer = combineReducers({
+  firebase: firebaseReducer,
+  firestore: firestoreReducer
+})
+
+const store = createStore(rootReducer);
 
 const rrfConfig = {
   userProfile: 'admin',
@@ -21,19 +24,19 @@ const rrfConfig = {
 
 const rrfProps = {
   firebase,
-    config: rrfConfig,
-    dispatch: store.dispatch,
-    createFirestoreInstance
- }
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance
+}
 
 ReactDOM.render(
-    <Provider store={store}>
+  <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
       <BrowserRouter>
-      <App />
+        <App />
       </BrowserRouter>
     </ReactReduxFirebaseProvider>
-    </Provider>,
+  </Provider>,
   document.getElementById('root')
 );
 

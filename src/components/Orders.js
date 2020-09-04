@@ -20,7 +20,7 @@ const Orders = ({ items, setToggleModal }) => {
                 )
         })
         return (
-                <ComponentMotionTag className="orders-area">
+                <ComponentMotionTag className="orders-area" data-title="Orders">
                         <ul className="orders-list">
                                 {order_items}
                         </ul>

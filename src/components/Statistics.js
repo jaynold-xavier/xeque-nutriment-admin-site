@@ -12,7 +12,7 @@ const Statistics = ({ stats }) => {
                 )
         })
         return (
-                <ComponentMotionTag className="stats-area" >
+                <ComponentMotionTag className="stats-area" data-title="Statistics">
                         <ul className="stats">{stat_items}</ul>
                 </ComponentMotionTag>
         )

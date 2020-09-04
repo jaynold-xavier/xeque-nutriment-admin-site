@@ -17,7 +17,7 @@ const MotionRedirect = ({ ...props }) => (
   </motion.div>
 )
 
-const Loading = React.memo(() => {
+const Loading = () => {
   return <div
     style={{
       marginTop: '45vh',
@@ -26,7 +26,7 @@ const Loading = React.memo(() => {
       fontSize: "1.5rem",
       position: 'absolute'
     }}>Loading...</div>;
-})
+}
 
 const AuthIsLoaded = React.memo(({ children }) => {
   const auth = useSelector(state => state.firebase.auth)
@@ -65,8 +65,8 @@ function App() {
 
   return (
     <div className="App">
+      <BackAnimation/>
       <AuthIsLoaded>
-        <BackAnimation/>
         <Suspense fallback={<Loading />}>
           <Navbar user={user} />
           <AnimatePresence exitBeforeEnter>
