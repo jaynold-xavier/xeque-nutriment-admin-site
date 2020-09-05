@@ -1,5 +1,5 @@
 .navbar {
-  width: 90%;
+  width: var(--content-width);
   position: relative;
   background-color: var(--navbar-color);
   border-radius: 50px;
@@ -11,7 +11,7 @@
   max-height: 3rem;
   display: flex;
   list-style-type: none;
-  width: var(--content-width);
+  width: inherit;
   margin: 0 auto;
   padding: 0;
   overflow: hidden;
@@ -39,7 +39,7 @@
 }
 
 .nav-item {
-  width: 15%;
+  width: 20%;
   min-width: 90px;
 }
 
@@ -70,7 +70,7 @@
 
 .user-logo {
   position: absolute;
-  right: 1rem;
+  right: 0.5rem;
   top: 0.4rem;
   line-height: 0;
   padding: 1rem 0.5rem 1rem 0.5rem;

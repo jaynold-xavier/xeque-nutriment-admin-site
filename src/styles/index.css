@@ -9,7 +9,7 @@
   --container-color: linear-gradient(45deg,
       rgb(194, 187, 199),
       rgb(177, 142, 204) 90%);
-  --content-width: 80%;
+  --content-width: 85%;
   font-size: 20px;
 }
 
@@ -52,7 +52,7 @@ img{
 }
 
 .verify {
-  box-shadow: inset 0px 5rem rgb(110, 81, 98);
+  box-shadow: inset 0px 5rem rgb(61, 81, 99);
   border: 2px snow solid;
   position: fixed;
   width: 500px;
@@ -64,25 +64,21 @@ img{
   /* Negative half of width. */
   display: flex;
   justify-content: space-evenly;
-  transition: all 500ms;
   align-items: center;
   overflow: hidden;
-  z-index: 100;
+  z-index: 6;
+  transition: all 500ms ease-in-out;
 }
 
 .verify .anim {
-  height: 100%;
-  margin-top: 1em;
-  vertical-align: middle;
-}
-
-.verify .anim span {
-  background: snow;
-  width: 0.5rem;
-  margin-left: 5px;
-  display: inline-block;
-  border-radius: 50px;
-  height: 2rem;
+  height: 0.5rem;
+  border-radius: 5px;
+  width: 3rem;
+  margin-left: 2rem;
+  background: linear-gradient(to right, rgb(227, 188, 255) 50%, transparent 50%);
+  background-size: 200%;
+  border: 2px rgb(0, 0, 0) solid;
+  transition: background-position 200ms ease-in-out;
   animation: anim_loader 500ms ease-in infinite backwards;
   animation-play-state: paused;
 }
@@ -100,15 +96,15 @@ button:hover {
 
 @keyframes anim_loader {
   0% {
-    transform: scale(0.8);
+    background-position: 100%;
   }
 
   50% {
-    transform: scale(1);
+    background-position: -100%;
   }
 
   100% {
-    transform: scale(0.8);
+    background-position: 100%;
   }
 }
 

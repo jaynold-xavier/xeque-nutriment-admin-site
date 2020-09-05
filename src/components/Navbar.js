@@ -13,11 +13,8 @@ const Navbar = ({user}) => {
         return (
                 <motion.nav className="navbar" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                         <div className="verify">
-                                <div className="anim">
-                                        <span>|</span>
-                                        <span>|</span>
-                                        <span>|</span>
-                                </div><div className="mess"></div>
+                                <div className="anim"></div>
+                                <div className="mess">s</div>
                         </div>
                         <label htmlFor="menu-button">
                                 <img src={menu} className="menu-icon" alt="logo" />

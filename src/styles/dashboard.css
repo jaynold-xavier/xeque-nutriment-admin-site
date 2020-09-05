@@ -107,8 +107,9 @@
 
 .order-item .item-content span {
         font-style: normal;
-        color: rgb(40, 40, 114);
+        color: #ffceb8;
         font-weight: bold;
+        text-decoration: underline;
 }
 
 .order-item .actions {
@@ -130,7 +131,7 @@
 
 .order-item button:hover {
         box-shadow: 5px 8px 8px rgb(38, 32, 73);
-        color: white;
+        color: rgb(229, 246, 202);
 }
 
 .order-item:not(:last-child) {

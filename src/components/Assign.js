@@ -43,12 +43,12 @@ const Assign = ({ toggleModal, setToggleModal }) => {
 
         const assignEmployee = () => {
                 const loader = document.querySelector(".verify");
-                const anim_icons = document.querySelectorAll(".verify .anim span");
+                const anim = document.querySelector(".verify .anim");
                 const anim_message = document.querySelector(".verify .mess");
-                loader.style.marginTop = "6rem";
                 loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
                 anim_message.innerHTML = window.navigator.onLine ? 'Processing...' : 'Assignment will be made when back online';
-                anim_icons.forEach(e => e.style.animationPlayState = "running");
+                loader.style.marginTop = "6rem";
+                anim.style.animationPlayState = "running";
 
                 if (selectedEmployee) {
                         db.collection("assignments").doc().set({
@@ -64,16 +64,13 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                                 loader.style.boxShadow = "inset 0px 5rem crimson";
                                 anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
                         })
+                        .finally(()=>anim.style.animationPlayState = "paused")
                 } else {
                         loader.style.boxShadow = "inset 0px 5rem crimson";
                         anim_message.innerHTML = "Please select an employee";
                 }
                 
-                anim_icons.forEach(e => e.style.animationPlayState = "paused")
-                setTimeout(() => {
-                        loader.style.marginTop = "0rem"
-                        loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
-                }, 2000)
+                setTimeout(() => loader.style.marginTop = "0rem", 2000);
                 setSelectedEmployee(undefined)
         }
         return (<>
