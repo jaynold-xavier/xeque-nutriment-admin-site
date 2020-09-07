@@ -35,14 +35,10 @@ form {
 }
 
 #helpId {
-        color: crimson;
+        color: red;
         font-weight: bold;
         grid-column: 2;
         text-align: left;
-}
-
-input::placeholder {
-        color: snow;
 }
 
 input[type="text"],
@@ -50,7 +46,6 @@ input[type="password"] {
         outline: none;
         border: 0;
         background: none;
-        color: snow;
         border-bottom: 2px #3c2149 solid;
         padding: 0.5rem;
         font-size: 0.8rem;
@@ -93,13 +88,13 @@ input[type="password"] {
 }
 
 .container a {
-        color: black;
+        color: #f8d6ff;
         text-decoration: none;
 }
 
 .container a:hover {
         text-decoration-line: underline;
-        text-decoration-color: var(--hover-color);
+        text-decoration-color: rgb(199, 235, 255);
 }
 
 .btn {
@@ -108,15 +103,11 @@ input[type="password"] {
         font-weight: bolder;
         color: var(--text-color);
         border-radius: 50px;
-        background: var(--background-color);
+        background: linear-gradient(15deg, rgb(174, 0, 255), dodgerblue);
         border: 0;
         padding: 0.7em;
+        transform: scale(0.9);
         width: 100%;
-}
-
-.btn:hover {
-        cursor: pointer;
-        box-shadow: 5px 5px 15px rgb(88, 88, 88);
 }
 
 .googleBtn {

@@ -5,12 +5,11 @@ import { useFirebase } from 'react-redux-firebase';
 const SignedInLinks = ({ u }) => {
         const firebase = useFirebase();
         function logout() {
-                firebase.auth().signOut()
-                        .then(() => {
-                                firebase.logout()
-                                        .catch(err => console.log(err))
-                        })
-                        .catch(err => console.log(err))
+                try {
+                        firebase.auth().signOut()
+                } catch (err) {
+                        console.log(err)
+                }
         }
         return (
                 <>

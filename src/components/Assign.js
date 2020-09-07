@@ -8,7 +8,7 @@ const Assign = ({ toggleModal, setToggleModal }) => {
         useFirestoreConnect('employees')
         const db = useFirestore();
         const emps = useSelector((state) => state.firestore.ordered.employees)
-        const [selectedEmployee, setSelectedEmployee] = useState(undefined);
+        const [selectedEmployee, setSelectedEmployee] = useState(null);
 
         if (!isLoaded(emps))
                 return false
@@ -41,53 +41,55 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                 )
         })
 
-        const assignEmployee = () => {
-                const loader = document.querySelector(".verify");
-                const anim = document.querySelector(".verify .anim");
+        const assignEmployee = async () => {
+                const loader = document.querySelector(".verify").style;
+                const anim = document.querySelector(".verify .anim").style;
                 const anim_message = document.querySelector(".verify .mess");
-                loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
-                anim_message.innerHTML = window.navigator.onLine ? 'Processing...' : 'Assignment will be made when back online';
-                loader.style.marginTop = "6rem";
-                anim.style.animationPlayState = "running";
+                loader.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
+                loader.marginTop = "6rem";
 
-                if (selectedEmployee) {
-                        db.collection("assignments").doc().set({
-                                order_id: toggleModal.assign.id,
-                                emp_email: selectedEmployee
-                        })
-                        .then(function () {
-                                loader.style.boxShadow = "inset 0px 5rem green";
+                try {
+                        if (selectedEmployee) {
+                                anim_message.innerHTML = window.navigator.onLine
+                                        ? 'Processing...' : 'Assignment will be made when back online';
+                                anim.animationPlayState = "running";
+
+                                await db.collection("assignments").doc().set({
+                                        order_id: toggleModal.assign.id,
+                                        emp_email: selectedEmployee
+                                })
+                                loader.boxShadow = "inset 0px 5rem green";
                                 anim_message.innerHTML = "Assignment Successfull";
-                                setToggleModal({orders: false, assign: false});
-                        })
-                        .catch((err) => {
-                                loader.style.boxShadow = "inset 0px 5rem crimson";
-                                anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
-                        })
-                        .finally(()=>anim.style.animationPlayState = "paused")
-                } else {
-                        loader.style.boxShadow = "inset 0px 5rem crimson";
-                        anim_message.innerHTML = "Please select an employee";
+                                setToggleModal({ orders: false, assign: false });
+                        } else {
+                                loader.boxShadow = "inset 0px 5rem crimson";
+                                anim_message.innerHTML = "Please select an employee";
+                        }
+                        setSelectedEmployee(null)
+                } catch (err) {
+                        loader.boxShadow = "inset 0px 5rem crimson";
+                        anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
+                } finally {
+                        anim.animationPlayState = "paused";
+                        await setTimeout(() => loader.marginTop = "0rem", 2000);
                 }
-                
-                setTimeout(() => loader.style.marginTop = "0rem", 2000);
-                setSelectedEmployee(undefined)
         }
+
         return (<>
                 {toggleModal.assign &&
                         <section className="order-item-back">
                                 <ComponentMotionTag className="assign-container"
                                         data-id={'Assignment to ID ' + toggleModal.assign.id}>
-                                        <span className="close-order-item" onClick={() => setToggleModal({orders: false, assign: false})}>x</span>
+                                        <span className="close-order-item" onClick={() => setToggleModal({ orders: false, assign: false })}>x</span>
                                         <span className="go-back" onClick={() => {
-                                                setToggleModal({orders: toggleModal.assign, assign: false})
+                                                setToggleModal({ orders: toggleModal.assign, assign: false })
                                         }}>{'<'}</span>
 
                                         <div className="grid-employees">
                                                 {emp_list}
                                         </div>
 
-                                        <button className="assign-button" onClick={() => assignEmployee()}>
+                                        <button className="assign-button" onClick={assignEmployee}>
                                                 SELECT
                                         </button>
                                 </ComponentMotionTag>

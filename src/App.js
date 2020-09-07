@@ -35,7 +35,7 @@ const AuthIsLoaded = React.memo(({ children }) => {
 })
 
 function App() {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(null);
   const location = useLocation();
   const firebase = useFirebase();
 
@@ -45,7 +45,6 @@ function App() {
         const url = process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT;
         if(firebase.auth().isSignInWithEmailLink(url)){
           const email = window.localStorage.getItem('emailForSignIn');
-          console.log(email)
           await firebase.auth().signInWithEmailLink(email, url);
           window.localStorage.removeItem('emailForSignIn');
         }  
@@ -71,21 +70,17 @@ function App() {
           <Navbar user={user} />
           <AnimatePresence exitBeforeEnter>
             <Switch location={location} key={location.key}>
-              <Route exact path="/">
-                <Home />
-              </Route>
+              <Route exact path="/" component={() => <Home/>}/>
               <Route path="/signup">
-                {user && user.emailVerified ?  <MotionRedirect to="/dashboard" /> :<Form title="Signup" />}
+                {user?.emailVerified ?  <MotionRedirect to="/dashboard" /> :<Form title="Signup" />}
               </Route>
               <Route path="/login">
-                {user && user.emailVerified ? <MotionRedirect to="/dashboard" /> : <Form title="Login" /> }
+                {user?.emailVerified ? <MotionRedirect to="/dashboard" /> : <Form title="Login" /> }
               </Route>
               <Route path="/dashboard">
-                {user && user.emailVerified ? <Dashboard user={{displayName: user.displayName, email: user.email}} /> :<MotionRedirect to="/" /> }
+                {user?.emailVerified ? <Dashboard user={{displayName: user.displayName, email: user.email}} /> :<MotionRedirect to="/" /> }
               </Route>
-              <Route path="*">
-                <ErrorBoundary />
-              </Route>
+              <Route path="*" component={() => <ErrorBoundary />}/>
             </Switch>
           </AnimatePresence>
         </Suspense>

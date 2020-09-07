@@ -17,12 +17,12 @@ const Home = () => {
                 }
         }
         return (
-        <motion.div className="welcome" 
-                variants={variants} 
-                initial={'hidden'} 
-                animate={'visible'} 
-                exit={{x: '100vw', transition: {ease: "easeInOut"}}}>
-                        <img src={logo} alt="logo_home" initial={'hidden'}/>
+                <motion.div className="welcome"
+                        variants={variants}
+                        initial={'hidden'}
+                        animate={'visible'}
+                        exit={{ x: '100vw', transition: { ease: "easeInOut" } }}>
+                        <img src={logo} alt="logo_home" initial={'hidden'} />
                         <h1>WELCOME</h1>
                         <span>to the admin site</span>
                 </motion.div>

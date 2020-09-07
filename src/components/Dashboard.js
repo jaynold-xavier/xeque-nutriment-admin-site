@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Loader from './Loader';
 import '../styles/dashboard.css';
+import { motion } from 'framer-motion';
 
 const OrderItem = React.lazy(() => import('./OrderItem')); 
 const Assign = React.lazy(() => import('./Assign')); 
@@ -41,17 +42,20 @@ const Dashboard = ({ user }) => {
                 }}>Orders List Is Empty</div>
         }
         return (
-                <div className="dashboard">
+                <motion.div className="dashboard" initial={{ opacity: 0 }} 
+                        animate={{ opacity: 1 }} 
+                        exit={{opacity: 0, transition: {type: "just", when: "beforeChildren"}}}>
+                                
                         <span className="welcome-mess">
                                 Welcome, <span>{user.displayName || user.email.substr(0, user.email.indexOf('@'))}</span>
                         </span>
                         <Orders items={orders} setToggleModal={setToggleModal} />
-                        <Statistics stats={stats} />
+                        <Statistics stats={stats} /> 
                         <Suspense fallback={<div>Loading...</div>}>
                                 <OrderItem toggleModal = {toggleModal} setToggleModal={setToggleModal} />
                                 <Assign toggleModal={toggleModal} setToggleModal={setToggleModal}/>
                         </Suspense>
-                </div>
+                </motion.div>
         )
 }
 

@@ -36,41 +36,41 @@ const Form = ({ title }) => {
                         true
         }
 
-        const onSubmit = (credentials) => {
-                const loader = document.querySelector(".verify");
+        const onSubmit = async (credentials) => {
+                const loader = document.querySelector(".verify").style;
                 const anim = document.querySelector(".verify .anim");
                 const anim_message = document.querySelector(".verify .mess");
-                loader.style.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
+                
+                loader.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
                 anim.style.animationPlayState = "running";
-                loader.style.marginTop = "6rem";
+                loader.marginTop = "6rem";
                 anim_message.innerHTML = 'Authenticating...';
 
-                (async function () {
-                        try {
-                                if (title === "Login") {
-                                        await firebase.login({ ...credentials })
-                                        loader.style.boxShadow = "inset 0px 5rem green";
-                                        anim_message.innerHTML = 'Successfully logged in';
-                                } else {
-                                        const actionCodeSettings = {
-                                                url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
-                                                handleCodeInApp: true
-                                        }
-                                        const user = await firebase.createUser({ ...credentials });
-                                        await firebase.auth().currentUser.sendEmailVerification(actionCodeSettings);
-                                        window.localStorage.setItem('emailForSignIn', user.email)
-                                        loader.style.boxShadow = "inset 0px 5rem goldenrod";
-                                        anim_message.innerHTML = 'A confirmation link has been sent to the specified email';
+                try {
+                        if (title === "Login") {
+                                const loginData = await firebase.login({ ...credentials });
+                                if(!loginData.user.user.emailVerified)
+                                        throw new Error("Your account is not verified!!.")
+                                loader.boxShadow = "inset 0px 5rem green";
+                                anim_message.innerHTML = 'Successfully logged in';
+                        } else {
+                                const actionCodeSettings = {
+                                        url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
+                                        handleCodeInApp: true
                                 }
-                        } catch (err) {
-                                loader.style.boxShadow = "inset 0px 5rem crimson";
-                                anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
+                                const user = await firebase.createUser({ ...credentials });
+                                await firebase.auth().currentUser.sendEmailVerification(actionCodeSettings);
+                                window.localStorage.setItem('emailForSignIn', user.email)
+                                loader.boxShadow = "inset 0px 5rem goldenrod";
+                                anim_message.innerHTML = 'A confirmation link has been sent to your email';
                         }
-                })()
-                .finally(_ => {
+                } catch (err) {
+                        loader.boxShadow = "inset 0px 5rem crimson";
+                        anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
+                } finally {
                         anim.style.animationPlayState = "paused";
-                        setTimeout(() => loader.style.marginTop = "0rem", 2000);
-                })
+                        await setTimeout(() => loader.marginTop = "0rem", 2000);
+                }
         }
 
         return (

@@ -6,9 +6,9 @@
   --text-color: snow;
   --hover-color: rgb(212, 0, 142);
   --shadow-color: 3px 3px 3px 3px rgb(0, 57, 114);
-  --container-color: linear-gradient(45deg,
-      rgb(194, 187, 199),
-      rgb(177, 142, 204) 90%);
+  --container-color: linear-gradient(to bottom,
+  rgb(241, 222, 255) 30%,
+      transparent 100%);
   --content-width: 85%;
   font-size: 20px;
 }
@@ -67,7 +67,7 @@ img{
   align-items: center;
   overflow: hidden;
   z-index: 6;
-  transition: all 500ms ease-in-out;
+  transition: margin 500ms ease-in-out;
 }
 
 .verify .anim {
@@ -75,9 +75,9 @@ img{
   border-radius: 5px;
   width: 3rem;
   margin-left: 2rem;
-  background: linear-gradient(to right, rgb(227, 188, 255) 50%, transparent 50%);
+  background: linear-gradient(to right, transparent 50%, rgb(227, 188, 255) 50%);
   background-size: 200%;
-  border: 2px rgb(0, 0, 0) solid;
+  border: 2px #353535 solid;
   transition: background-position 200ms ease-in-out;
   animation: anim_loader 500ms ease-in infinite backwards;
   animation-play-state: paused;
@@ -91,7 +91,9 @@ img{
 
 button:hover {
   cursor: pointer;
-  box-shadow: 5px 5px 15px rgb(88, 88, 88);
+  box-shadow: 5px 5px 15px rgb(30, 23, 58);
+  transition: transform 500ms ease;
+  transform: scale(1);
 }
 
 @keyframes anim_loader {
@@ -114,7 +116,7 @@ button:hover {
     margin-left: -40vw;
   }
   :root {
-    --content-width: 100%;
+    --content-width: 95%;
   }
 }
 
