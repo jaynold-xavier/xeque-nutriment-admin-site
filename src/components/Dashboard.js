@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react'
+import React, { useState } from 'react'
 import Orders from './Orders';
 import Statistics from './Statistics';
 import { useSelector } from 'react-redux'
@@ -7,14 +7,14 @@ import Loader from './Loader';
 import '../styles/dashboard.css';
 import { motion } from 'framer-motion';
 
-const OrderItem = React.lazy(() => import('./OrderItem')); 
-const Assign = React.lazy(() => import('./Assign')); 
+const OrderItem = React.lazy(() => import('./OrderItem'));
+const Assign = React.lazy(() => import('./Assign'));
 
 const Dashboard = ({ user }) => {
         useFirestoreConnect('orders')
         const orders = useSelector((state) => state.firestore.ordered.orders)
-        const [toggleModal, setToggleModal] = useState({assign: false, orders: false})
-        
+        const [toggleModal, setToggleModal] = useState({ assign: false, orders: false })
+
         const stats = [
                 {
                         title: "Orders Recieved",
@@ -29,9 +29,9 @@ const Dashboard = ({ user }) => {
                         num: 3
                 },
         ]
-        
+
         if (!isLoaded(orders))
-                return <Loader/>
+                return <Loader />
 
         if (isEmpty(orders)) {
                 return <div style={{
@@ -42,19 +42,17 @@ const Dashboard = ({ user }) => {
                 }}>Orders List Is Empty</div>
         }
         return (
-                <motion.div className="dashboard" initial={{ opacity: 0 }} 
-                        animate={{ opacity: 1 }} 
-                        exit={{opacity: 0, transition: {type: "just", when: "beforeChildren"}}}>
-                                
+                <motion.div className="dashboard" initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0, transition: { type: "just", when: "beforeChildren" } }}>
+
                         <span className="welcome-mess">
                                 Welcome, <span>{user.displayName || user.email.substr(0, user.email.indexOf('@'))}</span>
                         </span>
                         <Orders items={orders} setToggleModal={setToggleModal} />
-                        <Statistics stats={stats} /> 
-                        <Suspense fallback={<div>Loading...</div>}>
-                                <OrderItem toggleModal = {toggleModal} setToggleModal={setToggleModal} />
-                                <Assign toggleModal={toggleModal} setToggleModal={setToggleModal}/>
-                        </Suspense>
+                        <Statistics stats={stats} />
+                        <OrderItem toggleModal={toggleModal} setToggleModal={setToggleModal} />
+                        <Assign toggleModal={toggleModal} setToggleModal={setToggleModal} />
                 </motion.div>
         )
 }

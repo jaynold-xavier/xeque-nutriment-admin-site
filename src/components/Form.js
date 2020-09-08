@@ -8,11 +8,11 @@ import { useFirebase } from 'react-redux-firebase';
 import ComponentMotionTag from './ComponentMotionTag'
 import '../styles/form.css';
 
-const Form = ({ title }) => {
+const Form = ({ isLogin }) => {
         const { handleSubmit, register, errors } = useForm({ mode: 'onChange' });
         const firebase = useFirebase();
         const [strength, setStrength] = useState(0);
-        const link_title = title === "Login" ? "signup" : "login";
+        const link_title = isLogin ? "login" : "signup";
 
         const weakPassword = /^(?=.*[a-z])(?=.*\d).*$/g;
         const goodPassword = /^(?=.*[A-Z]).*$/g;
@@ -26,30 +26,32 @@ const Form = ({ title }) => {
                         (value.search(strongPassword) > -1)
                 ]
                 setStrength(validations.reduce((acc, curr) => acc + curr));
-                return value.length < 6 ? 
+                return value.length < 6 ?
                         "Enter minimum 6 characters" : true;
         }
 
         const checkEmail = (value) => {
-                return value.search(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi) ? 
+                return value.search(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi) ?
                         'Enter a valid email address' :
                         true
         }
 
         const onSubmit = async (credentials) => {
                 const loader = document.querySelector(".verify").style;
+                const btn = document.querySelector(".btn");
                 const anim = document.querySelector(".verify .anim");
                 const anim_message = document.querySelector(".verify .mess");
-                
+
                 loader.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
                 anim.style.animationPlayState = "running";
                 loader.marginTop = "6rem";
                 anim_message.innerHTML = 'Authenticating...';
+                btn.disabled = true;
 
                 try {
-                        if (title === "Login") {
+                        if (isLogin) {
                                 const loginData = await firebase.login({ ...credentials });
-                                if(!loginData.user.user.emailVerified)
+                                if (!loginData.user.user.emailVerified)
                                         throw new Error("Your account is not verified!!.")
                                 loader.boxShadow = "inset 0px 5rem green";
                                 anim_message.innerHTML = 'Successfully logged in';
@@ -69,12 +71,15 @@ const Form = ({ title }) => {
                         anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
                 } finally {
                         anim.style.animationPlayState = "paused";
-                        await setTimeout(() => loader.marginTop = "0rem", 2000);
+                        await setTimeout(() => {
+                                loader.marginTop = "0rem";
+                                loader.ontransitionend = btn.disabled = false;
+                        }, 2000);
                 }
         }
 
         return (
-                <ComponentMotionTag className="container" data-header={title}>
+                <ComponentMotionTag className="container" data-header={link_title}>
                         <form id="login-form" method="POST" onSubmit={handleSubmit(onSubmit)}>
                                 <div className="form-group">
                                         <label htmlFor="email"><img src={Email} alt="email-icon" /></label>
@@ -91,25 +96,25 @@ const Form = ({ title }) => {
                                                 aria-invalid={!!errors.password}
                                                 id="password" aria-describedby="helpId" placeholder="Password" />
                                         <div className="bar-area">
-                                                <span className={(strength > 0 && !errors.password ? 'bar bar-show' : 'bar')} />
-                                                <span className={(strength > 1 && !errors.password ? 'bar bar-show' : 'bar')} />
-                                                <span className={(strength > 2 && !errors.password ? 'bar bar-show' : 'bar')} />
-                                                <span className={(strength > 3 && !errors.password ? 'bar bar-show' : 'bar')} />
+                                                <span className={(strength > 0 ? 'bar bar-show' : 'bar')} />
+                                                <span className={(strength > 1 ? 'bar bar-show' : 'bar')} />
+                                                <span className={(strength > 2 ? 'bar bar-show' : 'bar')} />
+                                                <span className={(strength > 3 ? 'bar bar-show' : 'bar')} />
                                         </div>
                                         <small id="helpId">{errors.password?.message}</small>
                                 </div>
                                 <button id="btsub" className="btn" type="submit">
-                                        {title}
+                                        {link_title}
                                 </button>
                         </form>
                         <span className="or">OR</span>
                         <br /><br />
                         <button className="googleBtn" onClick={async () => await firebase.login({ provider: 'google', type: 'redirect' })}>
                                 <img src={Google} alt="Google" />
-                                <span>{title} with Google</span>
+                                <span>{link_title} with Google</span>
                         </button><br />
-                        <Link to={"/" + link_title}>
-                                {link_title === "login" ? "Already have an account? Click here to Login" : "Don't have an account? Click here to Signup"}
+                        <Link to={"/" + (isLogin ? "signup" : "login")}>
+                                {!isLogin ? "Already have an account? Click here to Login" : "Don't have an account? Click here to Signup"}
                         </Link>
                 </ComponentMotionTag>
         )

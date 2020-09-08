@@ -10,7 +10,7 @@ const OrderItem = ({ toggleModal, setToggleModal }) => {
                 {toggleModal.orders &&
                         <section className="order-item-back">
                                 <ComponentMotionTag className="order-container">
-                                        <span className="close-order-item" onClick={() => setToggleModal({orders: false, assign: false})}>x</span>
+                                        <span className="close-order-item" onClick={() => setToggleModal({ orders: false, assign: false })}>x</span>
                                         <div className="order-item-summary">
                                                 <div className="col">
                                                         ID: <span>{id}</span><br />
@@ -49,7 +49,7 @@ const OrderItem = ({ toggleModal, setToggleModal }) => {
                                         </div>
                                         <button className="assign-button"
                                                 onClick={() => {
-                                                        setToggleModal({assign: toggleModal.orders, orders: false})
+                                                        setToggleModal({ assign: toggleModal.orders, orders: false })
                                                 }}>
                                                 ASSIGN
                                         </button>

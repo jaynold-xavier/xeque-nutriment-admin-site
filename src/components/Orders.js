@@ -8,9 +8,9 @@ const Orders = ({ items, setToggleModal }) => {
                 return (
                         <li className="order-item" key={id}>
                                 <div className="item-content">
-                                        <span>Order ID:</span> {id}<br />
-                                        <span>From:</span> {orderedBy}<br />
-                                        <span>Date: </span>{sec}
+                                        <div>Order<span> # {id}</span></div>
+                                        <div>by, <span>{orderedBy}</span></div>
+                                        <div>on, <span>{sec}</span></div>
                                 </div>
                                 <div className="actions">
                                         <button onClick={()=>setToggleModal({assign: false, orders: item})}>View Details</button>

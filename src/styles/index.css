@@ -96,6 +96,11 @@ button:hover {
   transform: scale(1);
 }
 
+button:disabled{
+  background: grey;
+  cursor: not-allowed;
+}
+
 @keyframes anim_loader {
   0% {
     background-position: 100%;

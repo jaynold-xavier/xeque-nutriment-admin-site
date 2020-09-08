@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { isLoaded, useFirebase } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import BackAnimation from './components/BackAnimation'
+
 // pages
 const Home = React.lazy(() => import('./components/Home'));
 const Navbar = React.lazy(() => import('./components/Navbar'));
@@ -41,14 +42,14 @@ function App() {
 
   function onAuthStateChange() {
     return firebase.auth().onAuthStateChanged(async user => {
-      try{
+      try {
         const url = process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT;
-        if(firebase.auth().isSignInWithEmailLink(url)){
+        if (firebase.auth().isSignInWithEmailLink(url)) {
           const email = window.localStorage.getItem('emailForSignIn');
           await firebase.auth().signInWithEmailLink(email, url);
           window.localStorage.removeItem('emailForSignIn');
-        }  
-      } catch(err){
+        }
+      } catch (err) {
         console.log(err)
       }
       setUser(user);
@@ -64,23 +65,23 @@ function App() {
 
   return (
     <div className="App">
-      <BackAnimation/>
+      <BackAnimation />
       <AuthIsLoaded>
         <Suspense fallback={<Loading />}>
           <Navbar user={user} />
           <AnimatePresence exitBeforeEnter>
             <Switch location={location} key={location.key}>
-              <Route exact path="/" component={() => <Home/>}/>
+              <Route exact path="/" component={() => <Home />} />
               <Route path="/signup">
-                {user?.emailVerified ?  <MotionRedirect to="/dashboard" /> :<Form title="Signup" />}
+                {user?.emailVerified ? <MotionRedirect to="/dashboard" /> : <Form isLogin={false} />}
               </Route>
               <Route path="/login">
-                {user?.emailVerified ? <MotionRedirect to="/dashboard" /> : <Form title="Login" /> }
+                {user?.emailVerified ? <MotionRedirect to="/dashboard" /> : <Form isLogin={true} />}
               </Route>
               <Route path="/dashboard">
-                {user?.emailVerified ? <Dashboard user={{displayName: user.displayName, email: user.email}} /> :<MotionRedirect to="/" /> }
+                {user?.emailVerified ? <Dashboard user={{ displayName: user.displayName, email: user.email }} /> : <MotionRedirect to="/" />}
               </Route>
-              <Route path="*" component={() => <ErrorBoundary />}/>
+              <Route path="*" component={() => <ErrorBoundary />} />
             </Switch>
           </AnimatePresence>
         </Suspense>

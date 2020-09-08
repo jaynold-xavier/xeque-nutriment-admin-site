@@ -109,6 +109,7 @@
   }
 
   .navbar-nav {
+    width: 100%;
     flex-direction: column;
     border-radius: inherit;
   }

@@ -17,14 +17,15 @@
         font-weight: bolder;
 }
 
-.welcome-mess span {
+.welcome-mess span, .order-item .item-content span {
         text-transform: capitalize;
         color: gold;
+        font-style: italic;
 }
 
 .orders-area::before, .stats-area::before {
         content: attr(data-title);
-        background: rgb(104, 50, 129);
+        background: #683281;
         padding: 0.7rem;
         margin: -30px auto;
         text-transform: uppercase;
@@ -41,16 +42,16 @@
         height: fit-content;
         max-height: 500px;
         position: relative;
-        background: linear-gradient(0deg, rgb(128, 32, 150), transparent);
-        box-shadow: 3px 3px 3px 3px rgb(5, 4, 8);
+        background: linear-gradient(0deg, #802096, transparent);
+        box-shadow: 3px 3px 3px 3px #050408;
 }
 
 .orders-area::after, .stats-area::after {
         content: ":";
-        border-right: 2px orangered solid;
+        border-right: 2px #ff4500 solid;
         width: 5px;
         height: 30px;
-        border-left: 2px orangered solid;
+        border-left: 2px #ff4500 solid;
         position: absolute;
         transform: rotate(-45deg);
         top: -1rem;
@@ -63,8 +64,6 @@
         padding: 0;
         height: fit-content;
         overflow-y: auto;
-        overflow-x: hidden;
-        font-size: 0.9rem;
         font-family: 'Gill Sans', Calibri, 'Trebuchet MS', sans-serif, Arial;
         margin-bottom: 0;
         margin-top: 1.5rem;
@@ -81,7 +80,7 @@
 
 .orders-list::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background: linear-gradient(rgb(255, 173, 105) 70%, transparent);
+        background: linear-gradient(#d6b0ff 70%, transparent);
 }
 
 .orders-list::-webkit-scrollbar-corner {
@@ -90,54 +89,49 @@
 
 .order-item {
         display: flex;
-        flex-direction: row;
         position: relative;
+        font-size: smaller;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-evenly;
         height: 5rem;
-        padding: 1rem 0.5rem;
-        font-style: italic;
+        padding: 0.5rem 0.3rem;
         letter-spacing: 0.062em;
-        line-height: 1.5em;
-}
-
-.order-item .item-content{
         overflow: hidden;
+        word-wrap: none;
+        line-height: 1.9em;
+}
+.order-item .item-content{
+        width: 200px;
 }
 
-.order-item .item-content span {
-        font-style: normal;
-        color: #ffceb8;
-        font-weight: bold;
-        text-decoration: underline;
+.order-item .item-content div:first-child{
+        font-size: 1.3rem;
 }
 
 .order-item .actions {
-        bottom: 0.3rem;
         display: grid;
-        grid-template-rows: 1fr 1fr;
         gap: 1rem;
 }
 
 .order-item button {
         position: relative;
-        padding: 0.5rem;
+        padding: 0.4rem;
+        border-radius: 10px;
         cursor: pointer;
         font-weight: bold;
-        background: turquoise;
-        box-shadow: 3px 3px 3px rgb(38, 32, 73);
-        border: 0;
+        background: transparent;
+        color: #e5f6ca;
+        border: 2px #87cefa solid;
 }
 
 .order-item button:hover {
-        box-shadow: 5px 8px 8px rgb(38, 32, 73);
-        color: rgb(229, 246, 202);
+        background: #1e44ff;
+        box-shadow: 5px 8px 8px #262049;
 }
 
 .order-item:not(:last-child) {
-        border-bottom: 2px black solid;
+        border-bottom: 2px #000000 solid;
 }
-
 
 .stats-area {
         position: relative;
@@ -146,8 +140,8 @@
         justify-content: center;
         align-items: center;
         border-radius: 20px;
-        box-shadow: 3px 3px 3px rgb(183, 171, 255);
-        border: 0.01em rgb(255, 255, 255) solid;
+        box-shadow: 3px 3px 3px #b7abff;
+        border: 0.01em #ffffff solid;
 }
 
 .stats {
@@ -158,7 +152,7 @@
         position: inherit;
         height: 100%;
         width: 100%;
-        background: linear-gradient(0deg, rgb(25, 7, 63), transparent);
+        background: linear-gradient(0deg, #19073f, transparent);
         margin: 0;
         padding-top: 30px;
         padding-bottom: 10px;
@@ -173,11 +167,10 @@
 
 .stat-item:nth-child(odd):last-child {
         grid-column: span 2 / auto;
-        border-top: 3px rgb(247, 141, 255) solid;
 }
 
 .stat-item:nth-child(2n+0) {
-        border-left: 3px rgb(202, 182, 182) solid;
+        border-left: 3px #cab6b6 solid;
 }
 
 .stat-item {
@@ -185,12 +178,12 @@
         display: flex;
         flex-direction: column;
         position: inherit;
-        border-top: 3px rgb(247, 141, 255) solid;
+        border-top: 3px #f78dff solid;
         padding: 0.7rem;
 }
 
 .stat-anim {
-        border-top: 10px rgb(247, 141, 255) dashed;
+        border-top: 10px #f78dff dashed;
         padding: 2rem;
         margin: 0 auto;
         width: max-content;
@@ -219,7 +212,7 @@
         }
 
         50% {
-                border-top-color: gold;
+                border-top-color: #ffce72;
         }
 
         100% {
