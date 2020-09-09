@@ -17,7 +17,7 @@
         font-weight: bolder;
 }
 
-.welcome-mess span, .order-item .item-content span {
+.welcome-mess span, .item-content span {
         text-transform: capitalize;
         color: gold;
         font-style: italic;
@@ -40,7 +40,7 @@
         border-radius: 1rem;
         grid-row: span 2 / auto;
         height: fit-content;
-        max-height: 500px;
+        max-height: 25rem;
         position: relative;
         background: linear-gradient(0deg, #802096, transparent);
         box-shadow: 3px 3px 3px 3px #050408;
@@ -65,8 +65,8 @@
         height: fit-content;
         overflow-y: auto;
         font-family: 'Gill Sans', Calibri, 'Trebuchet MS', sans-serif, Arial;
-        margin-bottom: 0;
-        margin-top: 1.5rem;
+        margin-bottom: 0.2em;
+        margin-top: 1.5em;
 }
 
 .orders-list::-webkit-scrollbar {
@@ -80,7 +80,7 @@
 
 .orders-list::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background: linear-gradient(#d6b0ff 70%, transparent);
+        background: linear-gradient(#d6b0ff 50%, transparent);
 }
 
 .orders-list::-webkit-scrollbar-corner {
@@ -89,39 +89,39 @@
 
 .order-item {
         display: flex;
-        position: relative;
         font-size: smaller;
         align-items: center;
         justify-content: space-evenly;
-        height: 5rem;
         padding: 0.5rem 0.3rem;
         letter-spacing: 0.062em;
         overflow: hidden;
-        word-wrap: none;
-        line-height: 1.9em;
-}
-.order-item .item-content{
-        width: 200px;
+        line-height: 1.7em;
 }
 
-.order-item .item-content div:first-child{
+.item-content{
+        width: fit-content;
+        text-align: left;
+}
+
+.item-content div:first-child{
         font-size: 1.3rem;
 }
 
 .order-item .actions {
         display: grid;
-        gap: 1rem;
+        gap: 0.5em;
 }
 
 .order-item button {
         position: relative;
-        padding: 0.4rem;
+        padding: 0.5em;
         border-radius: 10px;
         cursor: pointer;
+        font-size: smaller;
         font-weight: bold;
         background: transparent;
         color: #e5f6ca;
-        border: 2px #87cefa solid;
+        border: 2px #d5adff solid;
 }
 
 .order-item button:hover {
@@ -154,8 +154,7 @@
         width: 100%;
         background: linear-gradient(0deg, #19073f, transparent);
         margin: 0;
-        padding-top: 30px;
-        padding-bottom: 10px;
+        padding-top: 1rem;
         border-radius: inherit;
 }
 
@@ -170,7 +169,7 @@
 }
 
 .stat-item:nth-child(2n+0) {
-        border-left: 3px #cab6b6 solid;
+        border-left: 3px #dfc1ff solid;
 }
 
 .stat-item {
@@ -178,7 +177,7 @@
         display: flex;
         flex-direction: column;
         position: inherit;
-        border-top: 3px #f78dff solid;
+        border-top: 3px #dfc1ff solid;
         padding: 0.7rem;
 }
 
@@ -193,7 +192,7 @@
         animation: stat-anim 700ms ease-out 0s infinite backwards;
 }
 
-.stat-anim~span {
+.stat-anim + span {
         margin-top: -2.7rem;
 }
 
@@ -217,14 +216,12 @@
 
         100% {
                 transform: rotate(360deg);
-                transform: rotate(360deg);
         }
 }
 
 @media only screen and (max-width: 700.99px) {
         .dashboard {
                 grid-template-columns: auto;
-                grid-template-rows: auto;
         }
 
         .welcome-mess {

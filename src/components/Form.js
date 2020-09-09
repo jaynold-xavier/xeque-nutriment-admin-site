@@ -15,7 +15,7 @@ const Form = ({ isLogin }) => {
         const link_title = isLogin ? "login" : "signup";
 
         const weakPassword = /^(?=.*[a-z])(?=.*\d).*$/g;
-        const goodPassword = /^(?=.*[A-Z]).*$/g;
+        const goodPassword = /^(?=^.{10,}$)(?=.*[A-Z]).*$/g;
         const strongPassword = /[!@./'"?#$%^&*\s]/g;
 
         const checkPasswordStrength = (value) => {
@@ -96,16 +96,14 @@ const Form = ({ isLogin }) => {
                                                 aria-invalid={!!errors.password}
                                                 id="password" aria-describedby="helpId" placeholder="Password" />
                                         <div className="bar-area">
-                                                <span className={(strength > 0 ? 'bar bar-show' : 'bar')} />
-                                                <span className={(strength > 1 ? 'bar bar-show' : 'bar')} />
-                                                <span className={(strength > 2 ? 'bar bar-show' : 'bar')} />
-                                                <span className={(strength > 3 ? 'bar bar-show' : 'bar')} />
+                                                <span className={"bar" + (strength > 0 && !errors.password ? ' bar-show' : '')} />
+                                                <span className={"bar" + (strength > 1 && !errors.password ? ' bar-show' : '')} />
+                                                <span className={"bar" + (strength > 2 && !errors.password ? ' bar-show' : '')} />
+                                                <span className={"bar" + (strength > 3 && !errors.password ? ' bar-show' : '')} />
                                         </div>
                                         <small id="helpId">{errors.password?.message}</small>
                                 </div>
-                                <button id="btsub" className="btn" type="submit">
-                                        {link_title}
-                                </button>
+                                <button className="btn">{link_title}</button>
                         </form>
                         <span className="or">OR</span>
                         <br /><br />

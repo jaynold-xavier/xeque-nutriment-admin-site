@@ -13,8 +13,8 @@ const Orders = ({ items, setToggleModal }) => {
                                         <div>on, <span>{sec}</span></div>
                                 </div>
                                 <div className="actions">
-                                        <button onClick={()=>setToggleModal({assign: false, orders: item})}>View Details</button>
-                                        <button onClick={()=>setToggleModal({assign: item, orders: false})}>Assign</button>
+                                        <button onClick={() => setToggleModal({ assign: false, orders: item })}>View Details</button>
+                                        <button onClick={() => setToggleModal({ assign: item, orders: false })}>Assign</button>
                                 </div>
                         </li>
                 )

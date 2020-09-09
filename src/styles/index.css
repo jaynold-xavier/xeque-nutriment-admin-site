@@ -55,12 +55,13 @@ img{
   box-shadow: inset 0px 5rem rgb(61, 81, 99);
   border: 2px snow solid;
   position: fixed;
-  width: 500px;
+  width: 25rem;
   height: 3em;
+  padding: 0.5rem 0;
   top: -5rem;
   left: 50%;
   /* Negative half of height. */
-  margin-left: -250px;
+  margin-left: -12.5rem;
   /* Negative half of width. */
   display: flex;
   justify-content: space-evenly;
@@ -71,9 +72,9 @@ img{
 }
 
 .verify .anim {
-  height: 0.5rem;
+  height: 0.8rem;
   border-radius: 5px;
-  width: 3rem;
+  width: 4rem;
   margin-left: 2rem;
   background: linear-gradient(to right, transparent 50%, rgb(227, 188, 255) 50%);
   background-size: 200%;
@@ -115,16 +116,6 @@ button:disabled{
   }
 }
 
-@media only screen and (max-width: 700.99px) {
-  .verify{
-    width: 80vw;
-    margin-left: -40vw;
-  }
-  :root {
-    --content-width: 95%;
-  }
-}
-
 @media only screen and (max-width: 400.99px) {
   :root {
     font-size: 15px
@@ -136,5 +127,27 @@ button:disabled{
 
   .verify .mess{
     font-size: 0.7rem;
+  }
+}
+
+@media only screen and (max-width: 700.99px) {
+  .verify{
+    width: 80vw;
+    margin-left: -40vw;
+  }
+  :root {
+    --content-width: 95%;
+  }
+}
+
+@media only screen and (min-width: 1440.99px) {
+  :root {
+    font-size: 25px
+  }
+}
+
+@media only screen and (min-width: 2000.99px) {
+  :root {
+    font-size: 35px
   }
 }

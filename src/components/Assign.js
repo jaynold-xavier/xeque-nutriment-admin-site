@@ -3,9 +3,13 @@ import { useFirestoreConnect, isLoaded, isEmpty, useFirestore } from 'react-redu
 import { useSelector } from 'react-redux';
 import ComponentMotionTag from './ComponentMotionTag'
 import '../styles/assign.css';
+import User from '../icons/user.svg'
 
 const Assign = ({ toggleModal, setToggleModal }) => {
-        useFirestoreConnect('employees')
+        useFirestoreConnect({
+                collection: 'employees',
+                orderBy: ['ordersCompleted', 'desc'],
+        })
         const db = useFirestore();
         const emps = useSelector((state) => state.firestore.ordered.employees)
         const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -32,11 +36,15 @@ const Assign = ({ toggleModal, setToggleModal }) => {
         }
 
         const emp_list = Object.keys(emps).map((key) => {
-                const { id, name, email } = emps[key];
+                const { id, name, email, ordersCompleted } = emps[key];
                 return (
-                        <div className="grid-employees-item" data-key={email} key={id} onClick={(e) => changeSelection(e)}>
-                                <span>{name.substr(0, 1).toUpperCase()}</span>
-                                <span>{name}</span>
+                        <div className={"grid-employees-item" + (email === selectedEmployee ? " selected" : "")}
+                                data-key={email} key={id} onClick={(e) => changeSelection(e)}>
+                                <img src={User} alt="user-template" />
+                                <div className="item-content" style={{ width: "60%" }}>
+                                        <div>Name: <span>{name}</span></div>
+                                        <div>Orders Completed: <span>{ordersCompleted}</span></div>
+                                </div>
                         </div>
                 )
         })
@@ -45,14 +53,17 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                 const loader = document.querySelector(".verify").style;
                 const anim = document.querySelector(".verify .anim").style;
                 const anim_message = document.querySelector(".verify .mess");
+                const btn = document.querySelector(".assign-button");
+
                 loader.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
                 loader.marginTop = "6rem";
 
                 try {
                         if (selectedEmployee) {
+                                anim.animationPlayState = "running";
                                 anim_message.innerHTML = window.navigator.onLine
                                         ? 'Processing...' : 'Assignment will be made when back online';
-                                anim.animationPlayState = "running";
+                                btn.disabled = true;
 
                                 await db.collection("assignments").doc().set({
                                         order_id: toggleModal.assign.id,
@@ -71,30 +82,31 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                         anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
                 } finally {
                         anim.animationPlayState = "paused";
-                        await setTimeout(() => loader.marginTop = "0rem", 2000);
+                        await setTimeout(() => {
+                                loader.marginTop = "0rem";
+                                loader.ontransitionend = btn.disabled = false;
+                        }, 2000);
                 }
         }
+        return toggleModal.assign ?
+                (
+                        <ComponentMotionTag className="order-container"
+                                data-id={'Order #' + toggleModal.assign.id}>
+                                <span className="close-order-item" onClick={() => setToggleModal({ orders: false, assign: false })}>x</span>
+                                <span className="go-back" onClick={() => {
+                                        setToggleModal({ orders: toggleModal.assign, assign: false })
+                                }}>{'<'}</span>
 
-        return (<>
-                {toggleModal.assign &&
-                        <section className="order-item-back">
-                                <ComponentMotionTag className="assign-container"
-                                        data-id={'Assignment to ID ' + toggleModal.assign.id}>
-                                        <span className="close-order-item" onClick={() => setToggleModal({ orders: false, assign: false })}>x</span>
-                                        <span className="go-back" onClick={() => {
-                                                setToggleModal({ orders: toggleModal.assign, assign: false })
-                                        }}>{'<'}</span>
+                                <div className="grid-employees">
+                                        {emp_list}
+                                </div>
 
-                                        <div className="grid-employees">
-                                                {emp_list}
-                                        </div>
-
-                                        <button className="assign-button" onClick={assignEmployee}>
-                                                SELECT
+                                <button className="assign-button"
+                                        disabled={selectedEmployee ? false : true}
+                                        onClick={assignEmployee}>
+                                        Assign
                                         </button>
-                                </ComponentMotionTag>
-                        </section>
-                }</>
-        )
+                        </ComponentMotionTag>
+                ) : false
 }
 export default React.memo(Assign);

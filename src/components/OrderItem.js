@@ -6,57 +6,55 @@ const OrderItem = ({ toggleModal, setToggleModal }) => {
         let { id, orderedBy, orderDate } = toggleModal.orders;
         orderDate = new Date(orderDate?.seconds * 1000).toDateString()
 
-        return (<>
-                {toggleModal.orders &&
-                        <section className="order-item-back">
-                                <ComponentMotionTag className="order-container">
-                                        <span className="close-order-item" onClick={() => setToggleModal({ orders: false, assign: false })}>x</span>
-                                        <div className="order-item-summary">
-                                                <div className="col">
-                                                        ID: <span>{id}</span><br />
-                                                        OrderedBy: <span>{orderedBy}</span>
-                                                </div>
-                                                <div className="col">
-                                                        OrderDate: <span>{orderDate}</span>
-                                                        <br />Priority: <span>High</span>
-                                                </div>
+        return toggleModal.orders ?
+                (
+                        <ComponentMotionTag className="order-container"
+                                data-id={'Order #' + toggleModal.orders.id}>
+                                <span className="close-order-item" onClick={() => setToggleModal({ orders: false, assign: false })}>x</span>
+                                <div className="order-item-summary">
+                                        <div className="col">
+                                                ID: <span>{id}</span><br />
+                                        OrderedBy: <span>{orderedBy}</span>
                                         </div>
-                                        <div className="order-item-itemlist">
-                                                <table className="table" width="100%">
-                                                        <thead>
-                                                                <tr>
-                                                                        <th>ID</th>
-                                                                        <th>Name</th>
-                                                                        <th>Date</th>
-                                                                        <th>Quantity</th>
-                                                                </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                                <tr>
-                                                                        <td>123</td>
-                                                                        <td>Bread</td>
-                                                                        <td>{new Date().toDateString()}</td>
-                                                                        <td>34</td>
-                                                                </tr>
-                                                                <tr>
-                                                                        <td>102</td>
-                                                                        <td>Cake</td>
-                                                                        <td>{new Date().toDateString()}</td>
-                                                                        <td>45</td>
-                                                                </tr>
-                                                        </tbody>
-                                                </table>
+                                        <div className="col">
+                                                OrderDate: <span>{orderDate}</span>
+                                                <br />Priority: <span>High</span>
                                         </div>
-                                        <button className="assign-button"
-                                                onClick={() => {
-                                                        setToggleModal({ assign: toggleModal.orders, orders: false })
-                                                }}>
-                                                ASSIGN
-                                        </button>
-                                </ComponentMotionTag>
-                        </section>
-                }</>
-        )
+                                </div>
+                                <div className="order-item-itemlist">
+                                        <table className="table" width="100%">
+                                                <thead>
+                                                        <tr>
+                                                                <th>ID</th>
+                                                                <th>Name</th>
+                                                                <th>Date</th>
+                                                                <th>Quantity</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr>
+                                                                <td>123</td>
+                                                                <td>Bread</td>
+                                                                <td>{new Date().toDateString()}</td>
+                                                                <td>34</td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td>102</td>
+                                                                <td>Cake</td>
+                                                                <td>{new Date().toDateString()}</td>
+                                                                <td>45</td>
+                                                        </tr>
+                                                </tbody>
+                                        </table>
+                                </div>
+                                <button className="assign-button"
+                                        onClick={() => {
+                                                setToggleModal({ assign: toggleModal.orders, orders: false })
+                                        }}>
+                                        View Employees
+                </button>
+                        </ComponentMotionTag>
+                ) : false
 }
 
 export default React.memo(OrderItem);

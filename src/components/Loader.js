@@ -5,7 +5,7 @@ const Loader = () => {
         return(
                 <div className="loader-back">
                         <div className="loading"></div>
-                        <span>Loading...</span>
+                        <span>Loading Data...</span>
                 </div>
         )
 }

@@ -1,9 +1,9 @@
-.order-item-back{
+.order-item-back {
         position: fixed;
         width: 100%;
         height: 100%;
-        top:0;
-        left:0;
+        top: 0;
+        left: 0;
         background: rgba(0, 0, 0, 0.6);
         text-align: center;
         z-index: 5;
@@ -11,7 +11,7 @@
 }
 
 .order-container::before {
-        content: "Order Details";
+        content: attr(data-id);
         background: rgb(104, 50, 129);
         padding: 0.7rem;
         margin: 0 auto;
@@ -21,30 +21,28 @@
         width: fit-content;
 }
 
-.order-container{
+.order-container {
         position: relative;
         margin: 0 auto;
         margin-top: 10rem;
         display: flex;
         flex-direction: column;
         border: 3px whitesmoke solid;
-        border-radius: 20px;
-        background: linear-gradient(0deg, plum, rgb(156, 155, 155));
+        border-radius: 1rem;
+        background: linear-gradient(to bottom, rgb(192, 150, 255) 40%, rgb(134, 144, 255));
         gap: 1rem;
-        outline: none;
-        max-width: 600px;
-        max-height: 500px;
-        height: fit-content;
+        max-width: 30rem;
+        max-height: 25rem;
         padding: 1rem;
 }
 
-.close-order-item{
+.close-order-item {
         position: absolute;
         top: 5px;
         right: 5px;
         line-height: 0;
         cursor: pointer;
-        padding :9px 1px 12px 2px;
+        padding: 0.5rem 0.2rem 0.7rem 0.2rem;
         background-color: rgb(46, 26, 46);
         border-radius: 50%;
         border: 2px whitesmoke solid;
@@ -53,11 +51,11 @@
         text-decoration: none;
 }
 
-.order-item-summary{
+.order-item-summary {
         display: flex;
 }
 
-.col{
+.col {
         text-align: left;
         display: grid;
         width: 100%;
@@ -66,7 +64,7 @@
         color: rgb(71, 39, 71);
 }
 
-.col span{
+.col span {
         width: 100%;
         color: snow;
         font-style: italic;
@@ -74,23 +72,23 @@
         overflow-x: auto;
 }
 
-.col:last-child{
+.col:last-child {
         border-left: 4px rgb(163, 77, 133) solid;
 }
 
-.table{
+.table {
         border-block: 3px rgb(93, 53, 80) solid;
 }
 
-.table th{
+.table th {
         background-color: rgb(39, 22, 81);
 }
 
-.table tr:nth-child(odd){
+.table tr:nth-child(odd) {
         background-color: rgb(82, 64, 124);
 }
 
-.table tr:nth-child(even){
+.table tr:nth-child(even) {
         background-color: rgb(110, 101, 134);
 }
 
@@ -108,13 +106,8 @@
         width: 50%;
 }
 
-.assign-button:hover {
-        cursor: pointer;
-        box-shadow: 5px 5px 25px rgb(104, 38, 54);
-}
-
 @media only screen and (max-width: 700.99px) {
-.order-container{
-        width: 80vw;
-}
+        .order-container {
+                width: 80vw;
+        }
 }

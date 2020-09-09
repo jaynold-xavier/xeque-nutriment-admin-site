@@ -11,7 +11,10 @@ const OrderItem = React.lazy(() => import('./OrderItem'));
 const Assign = React.lazy(() => import('./Assign'));
 
 const Dashboard = ({ user }) => {
-        useFirestoreConnect('orders')
+        useFirestoreConnect({
+                collection: 'orders',
+                orderBy: 'orderDate',
+        })
         const orders = useSelector((state) => state.firestore.ordered.orders)
         const [toggleModal, setToggleModal] = useState({ assign: false, orders: false })
 
@@ -51,8 +54,11 @@ const Dashboard = ({ user }) => {
                         </span>
                         <Orders items={orders} setToggleModal={setToggleModal} />
                         <Statistics stats={stats} />
-                        <OrderItem toggleModal={toggleModal} setToggleModal={setToggleModal} />
-                        <Assign toggleModal={toggleModal} setToggleModal={setToggleModal} />
+                        <section className="order-item-back"
+                                style={{ display: toggleModal.assign || toggleModal.orders ? 'block' : 'none' }}>
+                                <OrderItem toggleModal={toggleModal} setToggleModal={setToggleModal} />
+                                <Assign toggleModal={toggleModal} setToggleModal={setToggleModal} />
+                        </section>
                 </motion.div>
         )
 }

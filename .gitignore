@@ -12,6 +12,7 @@
 /build
 /dist
 /functions
+/.firebase
 
 # misc
 .DS_Store
