@@ -42,51 +42,44 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                                 data-key={email} key={id} onClick={(e) => changeSelection(e)}>
                                 <img src={User} alt="user-template" />
                                 <div className="item-content" style={{ width: "60%" }}>
-                                        <div>Name: <span>{name}</span></div>
+                                        <div><span>{name}</span></div>
                                         <div>Orders Completed: <span>{ordersCompleted}</span></div>
                                 </div>
                         </div>
                 )
         })
 
-        const assignEmployee = async () => {
+        const assignEmployee = () => {
                 const loader = document.querySelector(".verify").style;
                 const anim = document.querySelector(".verify .anim").style;
                 const anim_message = document.querySelector(".verify .mess");
                 const btn = document.querySelector(".assign-button");
 
-                loader.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
+                loader.boxShadow = "inset 0px 5rem #234b6e";
                 loader.marginTop = "6rem";
 
-                try {
-                        if (selectedEmployee) {
-                                anim.animationPlayState = "running";
-                                anim_message.innerHTML = window.navigator.onLine
-                                        ? 'Processing...' : 'Assignment will be made when back online';
-                                btn.disabled = true;
-
-                                await db.collection("assignments").doc().set({
-                                        order_id: toggleModal.assign.id,
-                                        emp_email: selectedEmployee
-                                })
-                                loader.boxShadow = "inset 0px 5rem green";
-                                anim_message.innerHTML = "Assignment Successfull";
-                                setToggleModal({ orders: false, assign: false });
-                        } else {
-                                loader.boxShadow = "inset 0px 5rem crimson";
-                                anim_message.innerHTML = "Please select an employee";
-                        }
-                        setSelectedEmployee(null)
-                } catch (err) {
+                anim.style.animationDuration = "500ms";
+                anim_message.innerHTML = window.navigator.onLine
+                        ? 'Processing...' : 'Assignment will be made when back online';
+                btn.disabled = true;
+                db.collection("assignments").doc().set({
+                        order_id: toggleModal.assign.id,
+                        emp_email: selectedEmployee
+                }).then(_ => {
+                        loader.boxShadow = "inset 0px 5rem green";
+                        anim_message.innerHTML = "Assignment Successfull";
+                        setSelectedEmployee(null);
+                        setToggleModal({ orders: false, assign: false });
+                }).catch((err) => {
                         loader.boxShadow = "inset 0px 5rem crimson";
                         anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
-                } finally {
-                        anim.animationPlayState = "paused";
-                        await setTimeout(() => {
+                }).finally(_ => {
+                        anim.style.animationDuration = "0";
+                        setTimeout(() => {
                                 loader.marginTop = "0rem";
                                 loader.ontransitionend = btn.disabled = false;
                         }, 2000);
-                }
+                })
         }
         return toggleModal.assign ?
                 (

@@ -42,8 +42,8 @@ const Form = ({ isLogin }) => {
                 const anim = document.querySelector(".verify .anim");
                 const anim_message = document.querySelector(".verify .mess");
 
-                loader.boxShadow = "inset 0px 5rem rgb(110, 81, 98)";
-                anim.style.animationPlayState = "running";
+                loader.boxShadow = "inset 0px 5rem #234b6e";
+                anim.style.animationDuration = "500ms";
                 loader.marginTop = "6rem";
                 anim_message.innerHTML = 'Authenticating...';
                 btn.disabled = true;
@@ -70,7 +70,7 @@ const Form = ({ isLogin }) => {
                         loader.boxShadow = "inset 0px 5rem crimson";
                         anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
                 } finally {
-                        anim.style.animationPlayState = "paused";
+                        anim.style.animationDuration = "0ms";
                         await setTimeout(() => {
                                 loader.marginTop = "0rem";
                                 loader.ontransitionend = btn.disabled = false;

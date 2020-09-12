@@ -3,7 +3,7 @@
         position: relative;
         background: rgb(104, 50, 129);
         padding: 1rem;
-        top: -30px;
+        top: -2rem;
         text-transform: uppercase;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
@@ -21,11 +21,9 @@
 
 form {
         margin: 0 auto;
-        margin-top: 10%;
+        margin-top: 1.5em;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-content: center;
         width: var(--content-width);
 }
 
@@ -98,7 +96,7 @@ input[type="password"] {
 }
 
 .btn {
-        margin: 20px auto;
+        margin: 1rem auto;
         font-size: 1rem;
         font-weight: bolder;
         color: var(--text-color);
@@ -115,11 +113,8 @@ input[type="password"] {
         background: white;
         border-radius: 5px;
         border: thin solid #888;
-        box-shadow: 1px 1px 1px grey;
-        white-space: nowrap;
         margin-bottom: 0.5rem;
         padding: 0.4rem;
-        overflow:hidden;
         text-transform: capitalize;
         transform: scale(0.9);
 }

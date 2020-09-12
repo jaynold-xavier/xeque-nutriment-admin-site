@@ -25,18 +25,19 @@
 
 .orders-area::before, .stats-area::before {
         content: attr(data-title);
-        background: #683281;
+        background: #efd7ff;
+        color: purple;
+        font-weight: bold;
         padding: 0.7rem;
-        margin: -30px auto;
+        margin-top: -1.5rem;
         text-transform: uppercase;
-        text-align: center;
-        width: 5rem;
         z-index: 1;
 }
 
 .orders-area {
         display: flex;
         flex-direction: column;
+        align-items: center;
         border-radius: 1rem;
         grid-row: span 2 / auto;
         height: fit-content;
@@ -61,17 +62,18 @@
 
 .orders-list {
         list-style-type: none;
+        width: 100%;
         padding: 0;
         height: fit-content;
         overflow-y: auto;
         font-family: 'Gill Sans', Calibri, 'Trebuchet MS', sans-serif, Arial;
         margin-bottom: 0.2em;
-        margin-top: 1.5em;
+        margin-top: 0.5rem;
 }
 
 .orders-list::-webkit-scrollbar {
         height: 0.25rem;
-        width: 0.75rem;
+        width: 0.25rem;
 }
 
 .orders-list::-webkit-scrollbar-track {

@@ -12,12 +12,13 @@
 
 .order-container::before {
         content: attr(data-id);
-        background: rgb(104, 50, 129);
+        background: #efd7ff;
+        color: purple;
+        font-weight: bold;
         padding: 0.7rem;
-        margin: 0 auto;
-        margin-top: -2.5rem;
-        text-align: center;
-        height: fit-content;
+        margin-top: -2rem;
+        text-transform: uppercase;
+        z-index: 1;
         width: fit-content;
 }
 
@@ -26,6 +27,7 @@
         margin: 0 auto;
         margin-top: 10rem;
         display: flex;
+        align-items: center;
         flex-direction: column;
         border: 3px whitesmoke solid;
         border-radius: 1rem;
@@ -52,7 +54,12 @@
 }
 
 .order-item-summary {
+        width: 100%;
         display: flex;
+}
+
+.order-item-itemlist{
+        width: 100%;
 }
 
 .col {

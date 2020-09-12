@@ -8,7 +8,7 @@
   --shadow-color: 3px 3px 3px 3px rgb(0, 57, 114);
   --container-color: linear-gradient(to bottom,
   rgb(241, 222, 255) 30%,
-      transparent 100%);
+      transparent);
   --content-width: 85%;
   font-size: 20px;
 }
@@ -34,7 +34,7 @@ body {
 
 body::-webkit-scrollbar {
   height: 0.25rem;
-  width: 0.75rem;
+  width: 0.5rem;
   background: var(--navbar-color);
 }
 
@@ -52,11 +52,11 @@ img{
 }
 
 .verify {
-  box-shadow: inset 0px 5rem rgb(61, 81, 99);
+  box-shadow: inset 0px 5rem #234b6e;
   border: 2px snow solid;
   position: fixed;
   width: 25rem;
-  height: 3em;
+  height: 3rem;
   padding: 0.5rem 0;
   top: -5rem;
   left: 50%;
@@ -72,16 +72,15 @@ img{
 }
 
 .verify .anim {
-  height: 0.8rem;
+  height: 0.6rem;
   border-radius: 5px;
-  width: 4rem;
+  width: 2.5rem;
   margin-left: 2rem;
-  background: linear-gradient(to right, transparent 50%, rgb(227, 188, 255) 50%);
+  background: linear-gradient(to left, transparent 50%, #d2b8ff 50%);
   background-size: 200%;
   border: 2px #353535 solid;
   transition: background-position 200ms ease-in-out;
-  animation: anim_loader 500ms ease-in infinite backwards;
-  animation-play-state: paused;
+  animation: anim_loader 0ms ease-in infinite backwards;
 }
 
 .verify .mess {
@@ -140,7 +139,7 @@ button:disabled{
   }
 }
 
-@media only screen and (min-width: 1440.99px) {
+@media only screen and (min-width: 1000.99px) {
   :root {
     font-size: 25px
   }
