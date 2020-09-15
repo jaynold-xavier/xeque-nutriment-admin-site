@@ -50,8 +50,8 @@
 .orders-area::after, .stats-area::after {
         content: ":";
         border-right: 2px #ff4500 solid;
-        width: 5px;
-        height: 30px;
+        width: 0.25rem;
+        height: 1.5rem;
         border-left: 2px #ff4500 solid;
         position: absolute;
         transform: rotate(-45deg);
@@ -132,7 +132,7 @@
 }
 
 .order-item:not(:last-child) {
-        border-bottom: 2px #000000 solid;
+        box-shadow: 2px 3px 2px #321d4d;
 }
 
 .stats-area {
@@ -141,29 +141,26 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background: linear-gradient(0deg, #19073f, transparent);
         border-radius: 20px;
         box-shadow: 3px 3px 3px #b7abff;
         border: 0.01em #ffffff solid;
 }
 
 .stats {
-        list-style-type: none;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        padding: 0;
         position: inherit;
         height: 100%;
         width: 100%;
-        background: linear-gradient(0deg, #19073f, transparent);
+        padding: 0;
         margin: 0;
-        padding-top: 1rem;
         border-radius: inherit;
 }
 
 .stat-item:nth-child(1),
 .stat-item:nth-child(2) {
         border-top: 0;
-
 }
 
 .stat-item:nth-child(odd):last-child {
@@ -201,10 +198,6 @@
 .stat-text {
         margin: 0 auto;
         margin-top: 1.5rem;
-}
-
-.stat-item:nth-child(odd):last-child .stat-anim~span {
-        left: 10.5rem;
 }
 
 @keyframes stat-anim {

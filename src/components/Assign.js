@@ -58,7 +58,7 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                 loader.boxShadow = "inset 0px 5rem #234b6e";
                 loader.marginTop = "6rem";
 
-                anim.style.animationDuration = "500ms";
+                anim.animationDuration = "500ms";
                 anim_message.innerHTML = window.navigator.onLine
                         ? 'Processing...' : 'Assignment will be made when back online';
                 btn.disabled = true;
@@ -74,7 +74,7 @@ const Assign = ({ toggleModal, setToggleModal }) => {
                         loader.boxShadow = "inset 0px 5rem crimson";
                         anim_message.innerHTML = err.toString().substr(0, err.toString().indexOf('.'));
                 }).finally(_ => {
-                        anim.style.animationDuration = "0";
+                        anim.animationDuration = "0ms";
                         setTimeout(() => {
                                 loader.marginTop = "0rem";
                                 loader.ontransitionend = btn.disabled = false;

@@ -31,7 +31,7 @@
         flex-direction: column;
         border: 3px whitesmoke solid;
         border-radius: 1rem;
-        background: linear-gradient(to bottom, rgb(192, 150, 255) 40%, rgb(134, 144, 255));
+        background: linear-gradient(to bottom, rgb(172, 132, 252) 40%, rgb(97, 176, 255));
         gap: 1rem;
         max-width: 30rem;
         max-height: 25rem;

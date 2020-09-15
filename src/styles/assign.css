@@ -28,7 +28,7 @@
 
 .grid-employees::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background: linear-gradient(#00248f 30%, transparent);
+        background: linear-gradient(#3d2489 30%, transparent);
 }
 
 .grid-employees::-webkit-scrollbar-corner {
