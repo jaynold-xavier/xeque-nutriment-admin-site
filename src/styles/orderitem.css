@@ -44,13 +44,10 @@
         right: 5px;
         line-height: 0;
         cursor: pointer;
-        padding: 0.5rem 0.2rem 0.7rem 0.2rem;
+        padding :0.5rem 0.2rem 0.7rem 0.2rem;
         background-color: rgb(46, 26, 46);
         border-radius: 50%;
-        border: 2px whitesmoke solid;
-        text-align: center;
-        width: 20px;
-        text-decoration: none;
+        width: 1rem;
 }
 
 .order-item-summary {
@@ -65,14 +62,14 @@
 .col {
         text-align: left;
         display: grid;
-        width: 100%;
+        width: inherit;
         font-weight: bolder;
         padding-left: 0.5rem;
         color: rgb(71, 39, 71);
 }
 
 .col span {
-        width: 100%;
+        width: inherit;
         color: snow;
         font-style: italic;
         word-wrap: normal;
